@@ -1,7 +1,12 @@
 add_library(lvgl)
-
-FILE(GLOB_RECURSE SOURCES lvgl/src/*.c)
-
-target_sources(lvgl PRIVATE ${SOURCES})
+FILE(GLOB_RECURSE LVGL_SOURCES lvgl/src/*.c)
+target_sources(lvgl PRIVATE ${LVGL_SOURCES})
 target_include_directories(lvgl INTERFACE lvgl)
 target_link_libraries(lvgl PUBLIC lvgl-config)
+
+add_library(lvgl-drivers)
+file(GLOB_RECURSE LVGL_DRIVERS_SOURCES lv_drivers/*.c)
+target_sources(lvgl-drivers PRIVATE ${LVGL_DRIVERS_SOURCES})
+target_include_directories(lvgl INTERFACE lv_drivers)
+target_link_libraries(lvgl-drivers PUBLIC lvgl lvgl-config)
+target_compile_definitions(lvgl-drivers PUBLIC LV_LVGL_H_INCLUDE_SIMPLE)
