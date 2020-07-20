@@ -1,20 +1,21 @@
 cmake_minimum_required(VERSION 3.15)
 
+option(ZEPHYR_TEST "Enables testing the zephyr module" OFF)
+option(ZEPHYR_MODULE "This enables this project to be used as a Zephyr RTOS module" OFF)
+
+if (ZEPHYR_TEST)
+   include(cmake/zephyr/test.cmake)
+endif()
+
+if (ZEPHYR_MODULE)
+    message(STATUS "Using lvgl-cpp library as Zephyr module...")
+endif()
+
 PROJECT(lvgl-cpp CXX C)
 
-include(cmake/StandardProjectSettings.cmake)
-include(cmake/Sanitizers.cmake)
-include(cmake/CompilerWarnings.cmake)
-include(cmake/Cache.cmake)
-include(cmake/StaticAnalyzers.cmake)
+set(CMAKE_CXX_STANDARD 20)
 
-add_library(PROJECT_OPTIONS INTERFACE)
-target_compile_features(PROJECT_OPTIONS INTERFACE cxx_std_17)
-enable_sanitizers(PROJECT_OPTIONS)
-
-add_library(PROJECT_WARNINGS INTERFACE)
-set_project_warnings(PROJECT_WARNINGS)
-
-add_subdirectory(external)
+add_subdirectory(ext)
 add_subdirectory(src)
+add_subdirectory(port)
 add_subdirectory(test)

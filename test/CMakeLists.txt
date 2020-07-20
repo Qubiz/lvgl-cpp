@@ -1,13 +1,7 @@
-find_package(SDL2 REQUIRED)
+if (NOT ZEPHYR_MODULE)
+    add_subdirectory(simulator)
+endif ()
 
-add_subdirectory(config)
-
-add_executable(test)
-target_sources(test
-        PRIVATE test.cpp)
-
-target_link_libraries(test
-        PRIVATE lvgl-drivers)
-
-target_compile_definitions(test
-        PUBLIC USE_MONITOR)
+if (ZEPHYR_TEST)
+    add_subdirectory(zephyr)
+endif ()

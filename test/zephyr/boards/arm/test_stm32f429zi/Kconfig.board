@@ -1,0 +1,5 @@
+# test_stm32f429zi board configuration
+
+config BOARD_TEST_STM32F429ZI
+    bool "STM32F429ZI LVGL Test Board"
+    depends on SOC_STM32F429XX

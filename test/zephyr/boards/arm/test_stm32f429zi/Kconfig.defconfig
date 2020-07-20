@@ -1,0 +1,16 @@
+if BOARD_TEST_STM32F429ZI
+
+config BOARD
+    default "test_stm32f429zi"
+
+if NETWORKING
+
+config NET_L2_ETHERNET
+	default y
+
+config ETH_STM32_HAL
+	default y
+
+endif # NETWORKING
+
+endif # BOARD_TEST_STM32F429ZI
