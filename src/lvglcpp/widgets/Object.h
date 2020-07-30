@@ -1,10 +1,5 @@
 #pragma once
 
-#ifndef LVGL_CPP_OBJECT_H
-#define LVGL_CPP_OBJECT_H
-
-#include <type_traits>
-
 #include "../core/Style.h"
 
 namespace lvglcpp {
@@ -38,6 +33,21 @@ namespace lvglcpp {
     template<typename Derived>
     class Object;
 
+    enum class ObjectPart {
+        MAIN = LV_OBJ_PART_MAIN,
+        ALL = LV_OBJ_PART_ALL
+    };
+
+    enum class ObjectState {
+        DEFAULT = LV_STATE_DEFAULT,
+        CHECKED = LV_STATE_CHECKED,
+        FOCUSED = LV_STATE_FOCUSED,
+        EDITED = LV_STATE_EDITED,
+        HOVERED = LV_STATE_HOVERED,
+        PRESSED = LV_STATE_PRESSED,
+        DISABLED = LV_STATE_DISABLED,
+    };
+
     enum class ObjectAlign : lv_align_t {
         CENTER = LV_ALIGN_CENTER,
         IN_TOP_LEFT = LV_ALIGN_IN_TOP_LEFT,
@@ -60,21 +70,6 @@ namespace lvglcpp {
         OUT_RIGHT_TOP = LV_ALIGN_OUT_RIGHT_TOP,
         OUT_RIGHT_MID = LV_ALIGN_OUT_RIGHT_MID,
         OUT_RIGHT_BOTTOM = LV_ALIGN_OUT_RIGHT_BOTTOM,
-    };
-
-    enum class ObjectPart : lv_obj_part_t {
-        MAIN = LV_OBJ_PART_MAIN,
-        ALL = LV_OBJ_PART_ALL
-    };
-
-    enum class ObjectState : lv_state_t {
-        DEFAULT = LV_STATE_DEFAULT,
-        CHECKED = LV_STATE_CHECKED,
-        FOCUSED = LV_STATE_FOCUSED,
-        EDITED = LV_STATE_EDITED,
-        HOVERED = LV_STATE_HOVERED,
-        PRESSED = LV_STATE_PRESSED,
-        DISABLED = LV_STATE_DISABLED,
     };
 
     template<typename Derived = void>
@@ -100,7 +95,13 @@ namespace lvglcpp {
          */
         Object(const Object &parent, const Object &copy) noexcept: obj_(lv_obj_create(parent.get(), copy.get())) {}
 
+        Object(lv_obj_t *other) noexcept: obj_(other) {}
+
         operator lv_obj_t *() { return get(); }
+
+        operator bool() { return get() != nullptr; };
+
+        operator Object<>() { return Object<>(get()); }
 
         /**
          * Returns a pointer to the underlying raw LVGL object.
@@ -211,12 +212,12 @@ namespace lvglcpp {
             return this->underlying();
         }
 
-        auto &clean_style_list(uint8_t part = LV_OBJ_PART_MAIN) const {
+        auto &clean_style_list(uint8_t part = LV_OBJ_PART_MAIN) {
             lv_obj_clean_style_list(get(), part);
             return this->underlying();
         }
 
-        auto &reset_style_list(uint8_t part = LV_OBJ_PART_MAIN) const {
+        auto &reset_style_list(uint8_t part = LV_OBJ_PART_MAIN) {
             lv_obj_reset_style_list(get(), part);
             return this->underlying();
         }
@@ -416,133 +417,135 @@ namespace lvglcpp {
             return Object(lv_obj_get_parent(get(), child->get()));
         }
 
-        auto count_children() const {
+        [[nodiscard]] auto count_children() const {
             return lv_obj_count_children(get());
         }
 
-        auto count_children_recursive() const {
+        [[nodiscard]] auto count_children_recursive() const {
             return lv_obj_count_children_recursive(get());
         }
 
         ///
 
-        auto coords() const {
+        [[nodiscard]] auto coords() const {
             lv_area_t area;
             lv_obj_get_coords(get(), &area);
             return area;
         }
 
-        auto inner_coords() const {
+        [[nodiscard]] auto inner_coords() const {
             lv_area_t area;
             lv_obj_get_inner_coords(get(), &area);
             return area;
         }
 
-        auto x() const {
+        [[nodiscard]] auto x() const {
             return lv_obj_get_x(get());
         }
 
-        auto y() const {
+        [[nodiscard]] auto y() const {
             return lv_obj_get_y(get());
         }
 
-        auto width() const {
+        [[nodiscard]] auto width() const {
             return lv_obj_get_width(get());
         }
 
-        auto height() const {
+        [[nodiscard]] auto height() const {
             return lv_obj_get_height(get());
         }
 
-        auto width_fit() const {
+        [[nodiscard]] auto width_fit() const {
             return lv_obj_get_width_fit(get());
         }
 
-        auto height_fit() const {
+        [[nodiscard]] auto height_fit() const {
             return lv_obj_get_height_fit(get());
         }
 
-        auto width_margin() const {
+        [[nodiscard]] auto width_margin() const {
             return lv_obj_get_width_margin(get());
         }
 
-        auto height_margin() const {
+        [[nodiscard]] auto height_margin() const {
             return lv_obj_get_height_margin(get());
         }
 
-        auto width_grid() const {
+        [[nodiscard]] auto width_grid() const {
             return lv_obj_get_width_grid(get());
         }
 
-        auto height_grid() const {
+        [[nodiscard]] auto height_grid() const {
             return lv_obj_get_height_grid(get());
         }
 
-        auto auto_realign() const {
+        [[nodiscard]] auto auto_realign() const {
             return lv_obj_get_auto_realign(get());
         }
 
-        auto ext_click_pad_left() const {
+        [[nodiscard]] auto ext_click_pad_left() const {
             return lv_obj_get_ext_click_pad_left(get());
         }
 
-        auto ext_click_pad_right() const {
+        [[nodiscard]] auto ext_click_pad_right() const {
             return lv_obj_get_ext_click_pad_right(get());
         }
 
-        auto ext_click_pad_top() const {
+        [[nodiscard]] auto ext_click_pad_top() const {
             return lv_obj_get_ext_click_pad_top(get());
         }
 
-        auto ext_click_pad_bottom() const {
+        [[nodiscard]] auto ext_click_pad_bottom() const {
             return lv_obj_get_ext_click_pad_bottom(get());
         }
 
-        auto ext_draw_pad() const {
+        [[nodiscard]] auto ext_draw_pad() const {
             return lv_obj_get_ext_draw_pad(get());
         }
 
-        [[nodiscard]] auto style_list(ObjectPart part) const {
-            return lv_obj_get_style_list(get(), part);
+        template<typename PartType>
+        [[nodiscard]] auto style_list(PartType part) const {
+            return lv_obj_get_style_list(get(), static_cast<uint8_t>(part));
         }
 
-        auto local_style(ObjectPart part) const {
-            return lv_obj_get_local_style(get(), part);
+        template<typename PartType>
+        auto local_style(PartType part) const {
+            return lv_obj_get_local_style(get(), static_cast<uint8_t>(part));
         }
 
-        auto hidden() const {
+        [[nodiscard]] auto hidden() const {
             return lv_obj_get_hidden(get());
         }
 
-        auto adv_hittest() const {
+        [[nodiscard]] auto adv_hittest() const {
             return lv_obj_get_adv_hittest(get());
         }
 
-        auto click() const {
+        [[nodiscard]] auto click() const {
             return lv_obj_get_click(get());
         }
 
-        auto top() const {
+        [[nodiscard]] auto top() const {
             return lv_obj_get_top(get());
         }
 
-        auto drag() const {
+        [[nodiscard]] auto drag() const {
             return lv_obj_get_drag(get());
         }
 
-        auto drag_dir() const {
+        [[nodiscard]] auto drag_dir() const {
             return lv_obj_get_drag_dir(get());
         }
 
-        auto get_throw() const {
+        [[nodiscard]] auto get_throw() const {
             return lv_obj_get_throw(get());
         }
 
-        auto drag_parent() const {
+        [[nodiscard]] auto drag_parent() const {
             return lv_obj_get_drag_parent(get());
         }
 
-        auto focus_parent() const {
+        [[nodiscard]] auto focus_parent() const {
             return lv_obj_get_focus_parent(get());
         }
 
@@ -595,7 +598,7 @@ namespace lvglcpp {
             return static_cast<ExtAttr *>(lv_obj_get_ext_attr(get()));
         }
 
-        [[nodiscard]] lv_obj_type_t get_type() const {
+        [[nodiscard]] lv_obj_type_t type() const {
             lv_obj_type_t type;
             lv_obj_get_type(get(), &type);
             return type;
@@ -630,28 +633,33 @@ namespace lvglcpp {
             return Object(lv_obj_get_focused_obj(get()));
         }
 
-        auto &init_draw_rect_dsc(ObjectPart part, lv_draw_rect_dsc_t &dsc) {
-            lv_obj_init_draw_rect_dsc(get(), part, &dsc);
+        template<typename PartType>
+        auto &init_draw_rect_dsc(PartType part, lv_draw_rect_dsc_t &dsc) {
+            lv_obj_init_draw_rect_dsc(get(), static_cast<uint8_t>(part), &dsc);
             return this->underlying();
         }
 
-        auto &init_draw_label_dsc(ObjectPart part, lv_draw_label_dsc_t &dsc) {
-            lv_obj_init_draw_label_dsc(get(), part, &dsc);
+        template<typename PartType>
+        auto &init_draw_label_dsc(PartType part, lv_draw_label_dsc_t &dsc) {
+            lv_obj_init_draw_label_dsc(get(), static_cast<uint8_t>(part), &dsc);
             return this->underlying();
         }
 
-        auto &init_draw_img_dsc(ObjectPart part, lv_draw_img_dsc_t &dsc) {
-            lv_obj_init_draw_img_dsc(get(), part, &dsc);
+        template<typename PartType>
+        auto &init_draw_img_dsc(PartType part, lv_draw_img_dsc_t &dsc) {
+            lv_obj_init_draw_img_dsc(get(), static_cast<uint8_t>(part), &dsc);
             return this->underlying();
         }
 
-        auto &init_draw_line_dsc(ObjectPart part, lv_draw_line_dsc_t &dsc) {
-            lv_obj_init_draw_line_dsc(get(), part, &dsc);
+        template<typename PartType>
+        auto &init_draw_line_dsc(PartType part, lv_draw_line_dsc_t &dsc) {
+            lv_obj_init_draw_line_dsc(get(), static_cast<uint8_t>(part), &dsc);
             return this->underlying();
         }
 
-        [[nodiscard]] lv_coord_t get_draw_rect_ext_pad_size(ObjectPart part) const {
-            return lv_obj_get_draw_rect_ext_pad_size(get(), part);
+        template<typename PartType>
+        [[nodiscard]] lv_coord_t get_draw_rect_ext_pad_size(PartType part) const {
+            return lv_obj_get_draw_rect_ext_pad_size(get(), static_cast<uint8_t>(part));
         }
 
         auto &fade_in(uint32_t time_ms, uint32_t delay_ms) {
@@ -686,18 +694,9 @@ namespace lvglcpp {
             return StyleProperty::get_value(get(), part);
         }
 
-    protected:
-        /**
-         * Construct an object by taking ownership of an existing LVGL object pointer.
-         * @param other The raw LVGL object pointer to take ownership of.
-         */
-        explicit Object(lv_obj_t *other) noexcept: obj_(other) {}
-
     private:
         lv_obj_t *obj_;
 
     };
 
 }
-
-#endif //LVGL_CPP_OBJECT_H
