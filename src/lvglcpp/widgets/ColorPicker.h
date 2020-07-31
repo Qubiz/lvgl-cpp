@@ -23,9 +23,18 @@ namespace lvglcpp {
     };
     
     class ColorPicker final : public Object<ColorPicker> {
+    protected:
+        explicit ColorPicker(lv_obj_t *other) noexcept: Object(other) {};
+
     public:
 
-        ColorPicker() : Object(lv_cpicker_create(lv_scr_act(), nullptr)) {}
+        ColorPicker() noexcept: Object(lv_cpicker_create(lv_scr_act(), nullptr)) {};
+
+        explicit ColorPicker(const Object<> &parent) noexcept
+                : Object(lv_cpicker_create(parent.get(), nullptr)) {}
+
+        explicit ColorPicker(const Object<> &parent, const ColorPicker &copy) noexcept
+                : Object(lv_cpicker_create(parent.get(), copy.get())) {}
 
         /*
          * SETTERS

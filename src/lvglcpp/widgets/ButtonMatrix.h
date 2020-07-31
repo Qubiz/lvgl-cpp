@@ -21,75 +21,20 @@ namespace lvglcpp {
         BG = LV_BTNMATRIX_PART_BG,
         BTN = LV_BTNMATRIX_PART_BTN
     };
-
-    /* constexpr bool strings_equal(char const *a, char const *b) {
-         return *a == *b && (*a == '\0' || strings_equal(a + 1, b + 1));
-     }
-
-
-     template<size_t WIDTH>
-     using StringArray = std::array<const char *, WIDTH>;
-
-     template<size_t WIDTH>
-     static constexpr bool valid(const StringArray<WIDTH> &array) {
-         return !std::ranges::any_of(array, [](const char *string) {
-             return strings_equal(string, "") || strings_equal(string, "\n");
-         });
-     }
-
-     template<size_t WIDTH, size_t HEIGHT>
-     using StringMatrix = std::array<const StringArray<WIDTH>, HEIGHT>;
-
-     template<size_t WIDTH, size_t HEIGHT>
-     static constexpr bool valid(const StringMatrix<WIDTH, HEIGHT> &matrix) {
-         return std::ranges::all_of(matrix, [](const StringArray<WIDTH> &array) {
-             return valid(array);
-         });
-     }
-
-     template<size_t WIDTH, size_t HEIGHT>
-     using ButtonControlMap = std::array<lv_btnmatrix_ctrl_t, WIDTH * HEIGHT>;
-
-     template<size_t WIDTH, size_t HEIGHT>
-     class ButtonMap {
-     public:
-         explicit constexpr ButtonMap(const StringMatrix<WIDTH, HEIGHT> &input) {
-             for (int row = 0; row < HEIGHT; ++row) {
-                 for (int col = 0; col < WIDTH + 1; ++col) {
-                     if (col == WIDTH) {
-                         if (row == HEIGHT - 1) {
-                             map[row * (WIDTH + 1) + col] = END;
-                         } else {
-                             map[row * (WIDTH + 1) + col] = NEW_LINE;
-                         }
-                     } else {
-                         map[row * (WIDTH + 1) + col] = input[row][col];
-                     }
-                 }
-             }
-         }
-
-         auto data() const {
-             return map.data();
-         }
-
-         constexpr auto width() const {
-             return WIDTH;
-         }
-
-         constexpr auto height() const {
-             return HEIGHT;
-         }
-
-     private:
-         static constexpr const char *NEW_LINE = "\n";
-         static constexpr const char *END = "";
-         StringArray<WIDTH * (HEIGHT + 1)> map;
-     };*/
-
+    
     class ButtonMatrix final : public Object<ButtonMatrix> {
+    protected:
+        explicit ButtonMatrix(lv_obj_t *other) noexcept: Object(other) {};
+
     public:
-        ButtonMatrix() : Object(lv_btnmatrix_create(lv_scr_act(), nullptr)) {}
+
+        ButtonMatrix() noexcept: Object(lv_btnmatrix_create(lv_scr_act(), nullptr)) {};
+
+        explicit ButtonMatrix(const Object<> &parent) noexcept
+                : Object(lv_btnmatrix_create(parent.get(), nullptr)) {}
+
+        explicit ButtonMatrix(const Object<> &parent, const ButtonMatrix &copy) noexcept
+                : Object(lv_btnmatrix_create(parent.get(), copy.get())) {}
 
         /*
          * SETTERS

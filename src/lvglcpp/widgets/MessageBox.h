@@ -16,9 +16,18 @@ namespace lvglcpp {
     };
 
     class MessageBox final : public Object<MessageBox> {
+    protected:
+        explicit MessageBox(lv_obj_t *other) noexcept: Object(other) {};
+
     public:
 
-        MessageBox() : Object(lv_msgbox_create(lv_scr_act(), nullptr)) {}
+        MessageBox() noexcept: Object(lv_msgbox_create(lv_scr_act(), nullptr)) {};
+
+        explicit MessageBox(const Object<> &parent) noexcept
+                : Object(lv_msgbox_create(parent.get(), nullptr)) {}
+
+        explicit MessageBox(const Object<> &parent, const MessageBox &copy) noexcept
+                : Object(lv_msgbox_create(parent.get(), copy.get())) {}
 
         MessageBox &add_btns(std::span<const char *> actions_map) {
             lv_msgbox_add_btns(get(), const_cast<const char **>(actions_map.data()));

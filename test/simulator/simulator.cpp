@@ -31,15 +31,6 @@ int main() {
             .style<prop::RADIUS>(0)
             .style<prop::BORDER_WIDTH>(0);
 
-    Calendar calendar{};
-    std::array<const char *, 7> day_names{
-            "Z", "M", "D",
-            "W", "D", "V", "Z"
-    };
-    calendar.size(LV_HOR_RES_MAX, LV_VER_RES_MAX);
-    calendar.day_names(day_names);
-    calendar.today_date({2020, 7, 29});
-    calendar.showed_date({2020, 7, 29});
     display.start(); // Blocking call
 
     return 0;

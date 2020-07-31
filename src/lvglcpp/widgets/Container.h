@@ -33,9 +33,18 @@ namespace lvglcpp {
     };
 
     class Container : public Object<Container> {
+    protected:
+        explicit Container(lv_obj_t *other) noexcept: Object(other) {};
+
     public:
 
-        Container() : Object(lv_cont_create(lv_scr_act(), nullptr)) {}
+        Container() noexcept: Object(lv_cont_create(lv_scr_act(), nullptr)) {};
+
+        explicit Container(const Object<> &parent) noexcept
+                : Object(lv_cont_create(parent.get(), nullptr)) {}
+
+        explicit Container(const Object<> &parent, const Container &copy) noexcept
+                : Object(lv_cont_create(parent.get(), copy.get())) {}
 
         /*
          * SETTERS

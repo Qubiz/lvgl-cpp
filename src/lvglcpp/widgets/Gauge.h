@@ -15,11 +15,18 @@ namespace lvglcpp {
     };
 
     class Gauge final : public Object<Gauge> {
+    protected:
+        explicit Gauge(lv_obj_t *other) noexcept: Object(other) {};
+
     public:
 
-        Gauge() : Object(lv_gauge_create(lv_scr_act(), nullptr)) {}
+        Gauge() noexcept: Object(lv_gauge_create(lv_scr_act(), nullptr)) {};
 
-        explicit Gauge(lv_obj_t *other) : Object(other) {}
+        explicit Gauge(const Object<> &parent) noexcept
+                : Object(lv_gauge_create(parent.get(), nullptr)) {}
+
+        explicit Gauge(const Object<> &parent, const Gauge &copy) noexcept
+                : Object(lv_gauge_create(parent.get(), copy.get())) {}
 
         /*
          * SETTERS

@@ -13,9 +13,18 @@ namespace lvglcpp {
     };
 
     class Switch final : public Object<Switch> {
+    protected:
+        explicit Switch(lv_obj_t *other) noexcept: Object(other) {};
+
     public:
 
-        Switch() : Object(lv_switch_create(lv_scr_act(), nullptr)) {}
+        Switch() noexcept: Object(lv_switch_create(lv_scr_act(), nullptr)) {};
+
+        explicit Switch(const Object<> &parent) noexcept
+                : Object(lv_switch_create(parent.get(), nullptr)) {}
+
+        explicit Switch(const Object<> &parent, const Switch &copy) noexcept
+                : Object(lv_switch_create(parent.get(), copy.get())) {}
 
         /*
          * SETTERS

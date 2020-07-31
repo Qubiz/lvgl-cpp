@@ -11,9 +11,18 @@ namespace lvglcpp {
     };
 
     class Line final : public Object<Line> {
+    protected:
+        explicit Line(lv_obj_t *other) noexcept: Object(other) {};
+
     public:
 
-        Line() : Object(lv_line_create(lv_scr_act(), nullptr)) {}
+        Line() noexcept: Object(lv_line_create(lv_scr_act(), nullptr)) {};
+
+        explicit Line(const Object<> &parent) noexcept
+                : Object(lv_line_create(parent.get(), nullptr)) {}
+
+        explicit Line(const Object<> &parent, const Line &copy) noexcept
+                : Object(lv_line_create(parent.get(), copy.get())) {}
 
         /*
          * SETTERS

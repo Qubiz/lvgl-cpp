@@ -24,9 +24,18 @@ namespace lvglcpp {
 
 
     class Spinner final : public Object<Spinner> {
+    protected:
+        explicit Spinner(lv_obj_t *other) noexcept: Object(other) {};
+
     public:
 
-        Spinner() : Object(lv_spinner_create(lv_scr_act(), nullptr)) {}
+        Spinner() noexcept: Object(lv_spinner_create(lv_scr_act(), nullptr)) {};
+
+        explicit Spinner(const Object<> &parent) noexcept
+                : Object(lv_spinner_create(parent.get(), nullptr)) {}
+
+        explicit Spinner(const Object<> &parent, const Spinner &copy) noexcept
+                : Object(lv_spinner_create(parent.get(), copy.get())) {}
 
         /*
          * SETTERS

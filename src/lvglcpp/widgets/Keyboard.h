@@ -19,9 +19,18 @@ namespace lvglcpp {
     };
 
     class Keyboard final : public Object<Keyboard> {
+    protected:
+        explicit Keyboard(lv_obj_t *other) noexcept: Object(other) {};
+
     public:
 
-        Keyboard() : Object(lv_keyboard_create(lv_scr_act(), nullptr)) {}
+        Keyboard() noexcept: Object(lv_keyboard_create(lv_scr_act(), nullptr)) {};
+
+        explicit Keyboard(const Object<> &parent) noexcept
+                : Object(lv_keyboard_create(parent.get(), nullptr)) {}
+
+        explicit Keyboard(const Object<> &parent, const Keyboard &copy) noexcept
+                : Object(lv_keyboard_create(parent.get(), copy.get())) {}
 
         /*
          * SETTERS

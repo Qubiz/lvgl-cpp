@@ -11,9 +11,18 @@ namespace lvglcpp {
     };
 
     class Linemeter final : public Object<Linemeter> {
+    protected:
+        explicit Linemeter(lv_obj_t *other) noexcept: Object(other) {};
+
     public:
 
-        Linemeter() : Object(lv_linemeter_create(lv_scr_act(), nullptr)) {}
+        Linemeter() noexcept: Object(lv_linemeter_create(lv_scr_act(), nullptr)) {};
+
+        explicit Linemeter(const Object<> &parent) noexcept
+                : Object(lv_linemeter_create(parent.get(), nullptr)) {}
+
+        explicit Linemeter(const Object<> &parent, const Linemeter &copy) noexcept
+                : Object(lv_linemeter_create(parent.get(), copy.get())) {}
 
         /*
          * SETTERS

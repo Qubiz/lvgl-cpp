@@ -11,9 +11,18 @@ namespace lvglcpp {
     };
 
     class Led final : public Object<Led> {
+    protected:
+        explicit Led(lv_obj_t *other) noexcept: Object(other) {};
+
     public:
 
-        Led() : Object(lv_led_create(lv_scr_act(), nullptr)) {}
+        Led() noexcept: Object(lv_led_create(lv_scr_act(), nullptr)) {};
+
+        explicit Led(const Object<> &parent) noexcept
+                : Object(lv_led_create(parent.get(), nullptr)) {}
+
+        explicit Led(const Object<> &parent, const Led &copy) noexcept
+                : Object(lv_led_create(parent.get(), copy.get())) {}
 
         /*
          * SETTERS

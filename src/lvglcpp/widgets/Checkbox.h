@@ -14,9 +14,18 @@ namespace lvglcpp {
     };
 
     class Checkbox final : public Object<Checkbox> {
+    protected:
+        explicit Checkbox(lv_obj_t *other) noexcept: Object(other) {};
+
     public:
 
-        Checkbox() : Object(lv_checkbox_create(lv_scr_act(), nullptr)) {}
+        Checkbox() noexcept: Object(lv_checkbox_create(lv_scr_act(), nullptr)) {};
+
+        explicit Checkbox(const Object<> &parent) noexcept
+                : Object(lv_checkbox_create(parent.get(), nullptr)) {}
+
+        explicit Checkbox(const Object<> &parent, const Checkbox &copy) noexcept
+                : Object(lv_checkbox_create(parent.get(), copy.get())) {}
 
         /*
          * SETTERS

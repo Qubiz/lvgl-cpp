@@ -19,9 +19,18 @@ namespace lvglcpp {
     };
 
     class Roller final : public Object<Roller> {
+    protected:
+        explicit Roller(lv_obj_t *other) noexcept: Object(other) {};
+
     public:
 
-        Roller() : Object(lv_roller_create(lv_scr_act(), nullptr)) {}
+        Roller() noexcept: Object(lv_roller_create(lv_scr_act(), nullptr)) {};
+
+        explicit Roller(const Object<> &parent) noexcept
+                : Object(lv_roller_create(parent.get(), nullptr)) {}
+
+        explicit Roller(const Object<> &parent, const Roller &copy) noexcept
+                : Object(lv_roller_create(parent.get(), copy.get())) {}
 
         /*
          * SETTERS

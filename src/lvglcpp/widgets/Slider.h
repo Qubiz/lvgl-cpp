@@ -19,9 +19,18 @@ namespace lvglcpp {
     };
     
     class Slider final : public Object<Slider> {
+    protected:
+        explicit Slider(lv_obj_t *other) noexcept: Object(other) {};
+
     public:
 
-        Slider() : Object(lv_slider_create(lv_scr_act(), nullptr)) {}
+        Slider() noexcept: Object(lv_slider_create(lv_scr_act(), nullptr)) {};
+
+        explicit Slider(const Object<> &parent) noexcept
+                : Object(lv_slider_create(parent.get(), nullptr)) {}
+
+        explicit Slider(const Object<> &parent, const Slider &copy) noexcept
+                : Object(lv_slider_create(parent.get(), copy.get())) {}
 
         /*
          * SETTERS

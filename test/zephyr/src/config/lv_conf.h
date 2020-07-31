@@ -1,6 +1,10 @@
 /**
  * @file lv_conf.h
- * Configuration file for LVGL v7.0.2
+ * Configuration file for LVGL v7.2.0
+ */
+
+/*
+ * COPY THIS FILE AS `lv_conf.h` NEXT TO the `lvgl` FOLDER
  */
 
 #if 1 /*Set it to "1" to enable content*/
@@ -168,7 +172,7 @@ typedef void * lv_anim_user_data_t;
 /* 1: Enable object groups (for keyboard/encoder navigation) */
 #define LV_USE_GROUP            1
 #if LV_USE_GROUP
-typedef void *lv_group_user_data_t;
+typedef void * lv_group_user_data_t;
 #endif  /*LV_USE_GROUP*/
 
 /* 1: Enable GPU interface*/
@@ -182,7 +186,7 @@ e.g. "stm32f769xx.h" or "stm32f429xx.h" */
 #define LV_USE_FILESYSTEM       1
 #if LV_USE_FILESYSTEM
 /*Declare the type of the user data of file system drivers (can be e.g. `void *`, `int`, `struct`)*/
-typedef void *lv_fs_drv_user_data_t;
+typedef void * lv_fs_drv_user_data_t;
 #endif
 
 /*1: Add a `user_data` to drivers and objects*/
@@ -193,6 +197,7 @@ typedef void *lv_fs_drv_user_data_t;
 
 /*1: Use the functions and types from the older API if possible */
 #define LV_USE_API_EXTENSION_V6  1
+#define LV_USE_API_EXTENSION_V7  1
 
 /*========================
  * Image decoder and cache
@@ -213,11 +218,15 @@ typedef void *lv_fs_drv_user_data_t;
 #define LV_IMG_CACHE_DEF_SIZE       1
 
 /*Declare the type of the user data of image decoder (can be e.g. `void *`, `int`, `struct`)*/
-typedef void *lv_img_decoder_user_data_t;
+typedef void * lv_img_decoder_user_data_t;
 
 /*=====================
  *  Compiler settings
  *====================*/
+
+/* For big endian systems set to 1 */
+#define LV_BIG_ENDIAN_SYSTEM    0
+
 /* Define a custom attribute to `lv_tick_inc` function */
 #define LV_ATTRIBUTE_TICK_INC
 
@@ -260,19 +269,19 @@ typedef void *lv_img_decoder_user_data_t;
  * It removes the need to manually update the tick with `lv_tick_inc`) */
 #define LV_TICK_CUSTOM     1
 #if LV_TICK_CUSTOM == 1
-#define LV_TICK_CUSTOM_INCLUDE  <kernel.h>       /*Header for the sys time function*/
-#define LV_TICK_CUSTOM_SYS_TIME_EXPR (k_uptime_get_32())     /*Expression evaluating to current systime in ms*/
+#define LV_TICK_CUSTOM_INCLUDE  <kernel.h>                  /*Header for the system time function*/
+#define LV_TICK_CUSTOM_SYS_TIME_EXPR (k_uptime_get_32())    /*Expression evaluating to current system time in ms*/
 #endif   /*LV_TICK_CUSTOM*/
 
-typedef void *lv_disp_drv_user_data_t;             /*Type of user data in the display driver*/
-typedef void *lv_indev_drv_user_data_t;            /*Type of user data in the input device driver*/
+typedef void * lv_disp_drv_user_data_t;             /*Type of user data in the display driver*/
+typedef void * lv_indev_drv_user_data_t;            /*Type of user data in the input device driver*/
 
 /*================
  * Log settings
  *===============*/
 
 /*1: Enable the log module*/
-#define LV_USE_LOG      1
+#define LV_USE_LOG      0
 #if LV_USE_LOG
 /* How important log should be added:
  * LV_LOG_LEVEL_TRACE       A lot of logs to give detailed information
@@ -281,7 +290,7 @@ typedef void *lv_indev_drv_user_data_t;            /*Type of user data in the in
  * LV_LOG_LEVEL_ERROR       Only critical issue, when the system may fail
  * LV_LOG_LEVEL_NONE        Do not log anything
  */
-#  define LV_LOG_LEVEL    LV_LOG_LEVEL_ERROR
+#  define LV_LOG_LEVEL    LV_LOG_LEVEL_WARN
 
 /* 1: Print the log with 'printf';
  * 0: user need to register a callback with `lv_log_register_print_cb`*/
@@ -340,8 +349,8 @@ typedef void *lv_indev_drv_user_data_t;            /*Type of user data in the in
 /* Montserrat fonts with bpp = 4
  * https://fonts.google.com/specimen/Montserrat  */
 #define LV_FONT_MONTSERRAT_12    0
-#define LV_FONT_MONTSERRAT_14    0
-#define LV_FONT_MONTSERRAT_16    1
+#define LV_FONT_MONTSERRAT_14    1
+#define LV_FONT_MONTSERRAT_16    0
 #define LV_FONT_MONTSERRAT_18    0
 #define LV_FONT_MONTSERRAT_20    0
 #define LV_FONT_MONTSERRAT_22    0
@@ -389,7 +398,7 @@ typedef void *lv_indev_drv_user_data_t;            /*Type of user data in the in
 #define LV_FONT_SUBPX_BGR    0
 
 /*Declare the type of the user data of fonts (can be e.g. `void *`, `int`, `struct`)*/
-typedef void *lv_font_user_data_t;
+typedef void * lv_font_user_data_t;
 
 /*================
  *  THEME USAGE
@@ -399,34 +408,34 @@ typedef void *lv_font_user_data_t;
 
 /* No theme, you can apply your styles as you need
  * No flags. Set LV_THEME_DEFAULT_FLAG 0 */
-#define LV_USE_THEME_EMPTY       1
+ #define LV_USE_THEME_EMPTY       1
 
 /*Simple to the create your theme based on it
  * No flags. Set LV_THEME_DEFAULT_FLAG 0 */
-#define LV_USE_THEME_TEMPLATE    1
+ #define LV_USE_THEME_TEMPLATE    1
 
 /* A fast and impressive theme.
  * Flags:
  * LV_THEME_MATERIAL_FLAG_LIGHT: light theme
  * LV_THEME_MATERIAL_FLAG_DARK: dark theme*/
-#define LV_USE_THEME_MATERIAL    1
+ #define LV_USE_THEME_MATERIAL    1
 
 /* Mono-color theme for monochrome displays.
  * If LV_THEME_DEFAULT_COLOR_PRIMARY is LV_COLOR_BLACK the
  * texts and borders will be black and the background will be
  * white. Else the colors are inverted.
  * No flags. Set LV_THEME_DEFAULT_FLAG 0 */
-#define LV_USE_THEME_MONO        1
+ #define LV_USE_THEME_MONO        1
 
 #define LV_THEME_DEFAULT_INCLUDE            <stdint.h>      /*Include a header for the init. function*/
 #define LV_THEME_DEFAULT_INIT               lv_theme_material_init
-#define LV_THEME_DEFAULT_COLOR_PRIMARY      LV_COLOR_RED
-#define LV_THEME_DEFAULT_COLOR_SECONDARY    LV_COLOR_BLUE
+#define LV_THEME_DEFAULT_COLOR_PRIMARY      lv_color_hex(0x01a2b1)
+#define LV_THEME_DEFAULT_COLOR_SECONDARY    lv_color_hex(0x44d1b6)
 #define LV_THEME_DEFAULT_FLAG               LV_THEME_MATERIAL_FLAG_LIGHT
-#define LV_THEME_DEFAULT_FONT_SMALL         &lv_font_montserrat_16
-#define LV_THEME_DEFAULT_FONT_NORMAL        &lv_font_montserrat_16
-#define LV_THEME_DEFAULT_FONT_SUBTITLE      &lv_font_montserrat_16
-#define LV_THEME_DEFAULT_FONT_TITLE         &lv_font_montserrat_16
+#define LV_THEME_DEFAULT_FONT_SMALL         &lv_font_montserrat_14
+#define LV_THEME_DEFAULT_FONT_NORMAL        &lv_font_montserrat_14
+#define LV_THEME_DEFAULT_FONT_SUBTITLE      &lv_font_montserrat_14
+#define LV_THEME_DEFAULT_FONT_TITLE         &lv_font_montserrat_14
 
 /*=================
  *  Text settings
@@ -439,7 +448,7 @@ typedef void *lv_font_user_data_t;
  * */
 #define LV_TXT_ENC LV_TXT_ENC_UTF8
 
-/*Can break (wrap) texts on these chars*/
+ /*Can break (wrap) texts on these chars*/
 #define LV_TXT_BREAK_CHARS                  " ,.;:-_"
 
 /* If a word is at least this long, will break wherever "prettiest"
@@ -491,7 +500,7 @@ typedef void *lv_font_user_data_t;
 
 #if LV_USE_USER_DATA
 /*Declare the type of the user data of object (can be e.g. `void *`, `int`, `struct`)*/
-typedef void *lv_obj_user_data_t;
+typedef void * lv_obj_user_data_t;
 /*Provide a function to free user data*/
 #define LV_USE_USER_DATA_FREE 0
 #if LV_USE_USER_DATA_FREE
@@ -525,13 +534,16 @@ typedef void *lv_obj_user_data_t;
 #define LV_USE_BAR      0
 
 /*Button (dependencies: lv_cont*/
-#define LV_USE_BTN      0
+#define LV_USE_BTN      1
 
 /*Button matrix (dependencies: -)*/
 #define LV_USE_BTNMATRIX     0
 
 /*Calendar (dependencies: -)*/
 #define LV_USE_CALENDAR 0
+#if LV_USE_CALENDAR
+#  define LV_CALENDAR_WEEK_STARTS_MONDAY    1
+#endif
 
 /*Canvas (dependencies: lv_img)*/
 #define LV_USE_CANVAS   0
@@ -546,7 +558,7 @@ typedef void *lv_obj_user_data_t;
 #endif
 
 /*Container (dependencies: -*/
-#define LV_USE_CONT     0
+#define LV_USE_CONT     1
 
 /*Color picker (dependencies: -*/
 #define LV_USE_CPICKER   0
@@ -601,7 +613,7 @@ typedef void *lv_obj_user_data_t;
 #define LV_USE_LINE     0
 
 /*List (dependencies: lv_page, lv_btn, lv_label, (lv_img optionally for icons ))*/
-#define LV_USE_LIST     0
+#define LV_USE_LIST     1
 #if LV_USE_LIST != 0
 /*Default animation time of focusing to a list element [ms] (0: no animation)  */
 #  define LV_LIST_DEF_ANIM_TIME  100
@@ -626,7 +638,7 @@ typedef void *lv_obj_user_data_t;
 #define LV_USE_MSGBOX     0
 
 /*Page (dependencies: lv_cont)*/
-#define LV_USE_PAGE     0
+#define LV_USE_PAGE     1
 #if LV_USE_PAGE != 0
 /*Focus default animation time [ms] (0: no animation)*/
 #  define LV_PAGE_DEF_ANIM_TIME     400

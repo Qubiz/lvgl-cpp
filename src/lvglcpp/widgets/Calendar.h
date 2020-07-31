@@ -16,9 +16,18 @@ namespace lvglcpp {
     };
 
     class Calendar final : public Object<Calendar> {
+    protected:
+        explicit Calendar(lv_obj_t *other) noexcept: Object(other) {};
+
     public:
 
-        Calendar() : Object(lv_calendar_create(lv_scr_act(), nullptr)) {}
+        Calendar() noexcept: Object(lv_calendar_create(lv_scr_act(), nullptr)) {};
+
+        explicit Calendar(const Object<> &parent) noexcept
+                : Object(lv_calendar_create(parent.get(), nullptr)) {}
+
+        explicit Calendar(const Object<> &parent, const Calendar &copy) noexcept
+                : Object(lv_calendar_create(parent.get(), copy.get())) {}
 
         /*
          * SETTERS

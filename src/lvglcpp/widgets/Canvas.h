@@ -7,9 +7,18 @@
 namespace lvglcpp {
 
     class Canvas final : public Object<Canvas> {
+    protected:
+        explicit Canvas(lv_obj_t *other) noexcept: Object(other) {};
+
     public:
 
-        Canvas() : Object(lv_canvas_create(lv_scr_act(), nullptr)) {}
+        Canvas() noexcept: Object(lv_canvas_create(lv_scr_act(), nullptr)) {};
+
+        explicit Canvas(const Object<> &parent) noexcept
+                : Object(lv_canvas_create(parent.get(), nullptr)) {}
+
+        explicit Canvas(const Object<> &parent, const Canvas &copy) noexcept
+                : Object(lv_canvas_create(parent.get(), copy.get())) {}
 
         /*
          * SETTERS

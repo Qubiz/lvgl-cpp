@@ -23,12 +23,21 @@ namespace lvglcpp {
     };
 
     class Tabview final : public Object<Tabview> {
+    protected:
+        explicit Tabview(lv_obj_t *other) noexcept: Object(other) {};
+
     public:
 
-        Tabview() : Object(lv_tabview_create(lv_scr_act(), nullptr)) {}
+        Tabview() noexcept: Object(lv_tabview_create(lv_scr_act(), nullptr)) {};
 
-        Page add_tab(const char *name) {
-            return Page(lv_tabview_add_tab(get(), name));
+        explicit Tabview(const Object<> &parent) noexcept
+                : Object(lv_tabview_create(parent.get(), nullptr)) {}
+
+        explicit Tabview(const Object<> &parent, const Tabview &copy) noexcept
+                : Object(lv_tabview_create(parent.get(), copy.get())) {}
+
+        Tabview add_tab(const char *name) {
+            return Tabview(lv_tabview_add_tab(get(), name));
         }
 
         void clean_tab() {
@@ -66,8 +75,8 @@ namespace lvglcpp {
             return lv_tabview_get_tab_count(get());
         }
 
-        [[nodiscard]] Page tab(uint16_t id) const {
-            return Page(lv_tabview_get_tab(get(), id));
+        [[nodiscard]] Tabview tab(uint16_t id) const {
+            return Tabview(lv_tabview_get_tab(get(), id));
         }
 
         [[nodiscard]] uint16_t anim_time() const {

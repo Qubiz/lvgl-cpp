@@ -7,8 +7,18 @@
 namespace lvglcpp {
 
     class Arc final : public Object<Arc> {
+    protected:
+        explicit Arc(lv_obj_t *other) noexcept: Object(other) {};
+
     public:
-        Arc() : Object(lv_arc_create(lv_scr_act(), nullptr)) {}
+
+        Arc() noexcept: Object(lv_arc_create(lv_scr_act(), nullptr)) {};
+
+        explicit Arc(const Object<> &parent) noexcept
+                : Object(lv_arc_create(parent.get(), nullptr)) {}
+
+        explicit Arc(const Object<> &parent, const Arc &copy) noexcept
+                : Object(lv_arc_create(parent.get(), copy.get())) {}
 
         /*
          * SETTERS

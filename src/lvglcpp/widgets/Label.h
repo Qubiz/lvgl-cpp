@@ -27,14 +27,23 @@ namespace lvglcpp {
     };
 
     class Label final : public Object<Label> {
+    protected:
+        explicit Label(lv_obj_t *other) noexcept: Object(other) {};
+
+        friend class List;
+
     public:
 
-        Label() : Object(lv_label_create(lv_scr_act(), nullptr)) {}
+        Label() noexcept: Object(lv_label_create(lv_scr_act(), nullptr)) {};
 
-        explicit Label(lv_obj_t *other) : Object(other) {};
+        explicit Label(const Object<> &parent) noexcept
+                : Object(lv_label_create(parent.get(), nullptr)) {}
 
-        explicit Label(const char *text) : Object(lv_label_create(lv_scr_act(), nullptr)) {
-            this->text(text);
+        explicit Label(const Object<> &parent, const Label &copy) noexcept
+                : Object(lv_label_create(parent.get(), copy.get())) {}
+
+        explicit Label(const char *txt) : Label() {
+            text(txt);
         }
 
         Label &text(const char *text) {

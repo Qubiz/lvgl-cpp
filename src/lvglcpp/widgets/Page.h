@@ -30,11 +30,20 @@ namespace lvglcpp {
     };
 
     class Page final : public Object<Page> {
+    protected:
+        explicit Page(lv_obj_t *other) noexcept: Object(other) {};
+
+        friend class Tabview;
+
     public:
 
-        Page() : Object(lv_page_create(lv_scr_act(), nullptr)) {}
+        Page() noexcept: Object(lv_page_create(lv_scr_act(), nullptr)) {};
 
-        explicit Page(lv_obj_t *other) : Object(other) {}
+        explicit Page(const Object<> &parent) noexcept
+                : Object(lv_page_create(parent.get(), nullptr)) {}
+
+        explicit Page(const Object<> &parent, const Page &copy) noexcept
+                : Object(lv_page_create(parent.get(), copy.get())) {}
 
         void clean() {
             lv_page_clean(get());
@@ -45,7 +54,7 @@ namespace lvglcpp {
          */
 
         [[nodiscard]] Object<> scrollable() const {
-            return lv_page_get_scrollable(get());
+            return Object<>(lv_page_get_scrollable(get()));
         }
 
         [[nodiscard]] uint16_t anim_time() const {

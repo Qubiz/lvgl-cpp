@@ -24,7 +24,18 @@ namespace lvglcpp {
         static constexpr auto ANIM_STATE_INV = LV_BAR_ANIM_STATE_INV;
         static constexpr auto ANIM_STATE_NORM = LV_BAR_ANIM_STATE_NORM;
 
-        Bar() : Object(lv_bar_create(lv_scr_act(), nullptr)) {}
+    protected:
+        explicit Bar(lv_obj_t *other) noexcept: Object(other) {};
+
+    public:
+
+        Bar() noexcept: Object(lv_bar_create(lv_scr_act(), nullptr)) {};
+
+        explicit Bar(const Object<> &parent) noexcept
+                : Object(lv_bar_create(parent.get(), nullptr)) {}
+
+        explicit Bar(const Object<> &parent, const Bar &copy) noexcept
+                : Object(lv_bar_create(parent.get(), copy.get())) {}
 
         /*
          * SETTERS

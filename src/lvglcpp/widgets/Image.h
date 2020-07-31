@@ -7,13 +7,34 @@
 namespace lvglcpp {
 
     class Image final : public Object<Image> {
+    protected:
+        explicit Image(lv_obj_t *other) noexcept: Object(other) {};
+
+        friend class List;
+
     public:
-        Image() : Object(lv_img_create(lv_scr_act(), nullptr)) {}
 
-        explicit Image(lv_obj_t *other) : Object(other) {};
+        Image() noexcept: Object(lv_img_create(lv_scr_act(), nullptr)) {};
 
-        explicit Image(const lv_img_dsc_t &image) : Object(lv_img_create(lv_scr_act(), nullptr)) {
-            set_src(image);
+        explicit Image(const Object<> &parent) noexcept
+                : Object(lv_img_create(parent.get(), nullptr)) {}
+
+        explicit Image(const Object<> &parent, const Image &copy) noexcept
+                : Object(lv_img_create(parent.get(), copy.get())) {}
+
+        // Image specific constructors
+        explicit Image(const lv_img_dsc_t &source) noexcept {
+            set_src(source);
+        }
+
+        explicit Image(const lv_img_dsc_t &source, const Object<> &parent) noexcept
+                : Image(parent) {
+            set_src(source);
+        }
+
+        explicit Image(const lv_img_dsc_t &source, const Object<> &parent, const Image &copy) noexcept
+                : Image(parent, copy) {
+            set_src(source);
         }
 
         /*
@@ -65,11 +86,11 @@ namespace lvglcpp {
          */
 
         template<typename SourceType>
-        [[nodiscard]] const SourceType* src() const {
-            return reinterpret_cast<SourceType*>(lv_img_get_src(get()));
+        [[nodiscard]] const SourceType *src() const {
+            return reinterpret_cast<SourceType *>(lv_img_get_src(get()));
         }
 
-        [[nodiscard]] const char* file_name() const {
+        [[nodiscard]] const char *file_name() const {
             return lv_img_get_file_name(get());
         }
 

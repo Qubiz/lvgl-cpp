@@ -74,39 +74,26 @@ namespace lvglcpp {
 
     template<typename Derived = void>
     class Object : public detail::crtp<Derived, Object> {
+    protected:
+        explicit Object(lv_obj_t *other) noexcept: obj_(other) {};
+
+        friend class Page;
+
     public:
-        /**
-         * Construct a new object and take ownership. The object will be created on the
-         * current active screen.
-         */
-        explicit Object() noexcept: obj_(lv_obj_create(lv_scr_act(), nullptr)) {}
+        Object() noexcept: obj_(lv_obj_create(lv_scr_act(), nullptr)) {};
 
-        /**
-         * Copy constructor. Creates a copy of the given object with
-         * the currently active screen as its parent.
-         * @param copy The object to copy.
-         */
-        Object(const Object &copy) noexcept: obj_(lv_obj_create(lv_scr_act(), copy.get())) {}
+        explicit Object(const Object<> &parent) noexcept
+                : obj_(lv_obj_create(parent.get(), nullptr)) {}
 
-        /**
-         * Copy constructor. Creates a copy of an object with the given parent.
-         * @param parent The parent of the object.
-         * @param copy The object to copy.
-         */
-        Object(const Object &parent, const Object &copy) noexcept: obj_(lv_obj_create(parent.get(), copy.get())) {}
+        explicit Object(const Object<> &parent, const Object &copy) noexcept
+                : obj_(lv_obj_create(parent.get(), copy.get())) {}
 
-        Object(lv_obj_t *other) noexcept: obj_(other) {}
+        operator lv_obj_t *() { return obj_; }
 
-        operator lv_obj_t *() { return get(); }
-
-        operator bool() { return get() != nullptr; };
+        bool valid() { return obj_ != nullptr; };
 
         operator Object<>() { return Object<>(get()); }
 
-        /**
-         * Returns a pointer to the underlying raw LVGL object.
-         * @return The raw LVGL object pointer.
-         */
         [[nodiscard]] lv_obj_t *get() const {
             return obj_;
         }
@@ -629,7 +616,7 @@ namespace lvglcpp {
             return lv_obj_is_focused(get());
         }
 
-        auto focused_obj() const {
+        [[nodiscard]] auto focused_obj() const {
             return Object(lv_obj_get_focused_obj(get()));
         }
 
@@ -694,7 +681,7 @@ namespace lvglcpp {
             return StyleProperty::get_value(get(), part);
         }
 
-    private:
+    protected:
         lv_obj_t *obj_;
 
     };

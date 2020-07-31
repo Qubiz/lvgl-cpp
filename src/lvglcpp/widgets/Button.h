@@ -20,11 +20,21 @@ namespace lvglcpp {
     };
 
     class Button final : public Object<Button> {
+    protected:
+        explicit Button(lv_obj_t *other) noexcept: Object(other) {};
+
+        friend class List;
+        friend class Window;
+
     public:
 
-        Button() : Object(lv_btn_create(lv_scr_act(), nullptr)) {}
+        Button() noexcept: Object(lv_btn_create(lv_scr_act(), nullptr)) {};
 
-        explicit Button(lv_obj_t * other) : Object(other) {}
+        explicit Button(const Object<> &parent) noexcept
+                : Object(lv_btn_create(parent.get(), nullptr)) {}
+
+        explicit Button(const Object<> &parent, const Button &copy) noexcept
+                : Object(lv_btn_create(parent.get(), copy.get())) {}
 
         /*
          * SETTERS

@@ -19,8 +19,6 @@ device *display_device = nullptr;
 void main() {
     display_blanking_off(display_device);
 
-    LOG_INF("Starting main loop!");
-
     while (true) {
         lv_task_handler();
         k_msleep(5);
@@ -31,7 +29,9 @@ std::unique_ptr<ZephyrDisplayDriver<320, 240>> display;
 
 extern "C" inline int lvgl_init(device *);
 
-inline int lvgl_init(device *dev) {
+int lvgl_init(device *dev) {
+
+    LOG_DBG("LVGL Initialization...");
 
     display_device = device_get_binding("DISPLAY");
 
@@ -39,13 +39,6 @@ inline int lvgl_init(device *dev) {
         LOG_ERR("Unable to find display device...");
         return -ENODEV;
     }
-
-    // Log print function. Receives "Log Level", "File path", "Line number", "Function name" and "Description".
-    lv_log_register_print_cb([](lv_log_level_t level, const char *, uint32_t, const char *,
-                                const char *description) {
-        uint8_t zephyr_level = LOG_LEVEL_DBG - level;
-        Z_LOG(zephyr_level, "%s", log_strdup(description));
-    });
 
     lv_init();
 

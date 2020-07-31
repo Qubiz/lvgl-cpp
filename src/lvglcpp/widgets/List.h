@@ -21,9 +21,18 @@ namespace lvglcpp {
     };
 
     class List final : public Object<List> {
+    protected:
+        explicit List(lv_obj_t *other) noexcept: Object(other) {};
+
     public:
 
-        List() : Object(lv_list_create(lv_scr_act(), nullptr)) {}
+        List() noexcept: Object(lv_list_create(lv_scr_act(), nullptr)) {};
+
+        explicit List(const Object<> &parent) noexcept
+                : Object(lv_list_create(parent.get(), nullptr)) {}
+
+        explicit List(const Object<> &parent, const List &copy) noexcept
+                : Object(lv_list_create(parent.get(), copy.get())) {}
 
         /*
          * SETTERS

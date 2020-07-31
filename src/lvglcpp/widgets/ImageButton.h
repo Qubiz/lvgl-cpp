@@ -13,9 +13,18 @@ namespace lvglcpp {
     };
 
     class ImageButton final : public Object<ImageButton> {
+    protected:
+        explicit ImageButton(lv_obj_t *other) noexcept: Object(other) {};
+
     public:
 
-        ImageButton() : Object(lv_imgbtn_create(lv_scr_act(), nullptr)) {}
+        ImageButton() noexcept: Object(lv_imgbtn_create(lv_scr_act(), nullptr)) {};
+
+        explicit ImageButton(const Object<> &parent) noexcept
+                : Object(lv_imgbtn_create(parent.get(), nullptr)) {}
+
+        explicit ImageButton(const Object<> &parent, const ImageButton &copy) noexcept
+                : Object(lv_imgbtn_create(parent.get(), copy.get())) {}
 
         /*
          * SETTERS

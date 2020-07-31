@@ -13,9 +13,18 @@ namespace lvglcpp {
     };
 
     class Tileview final : public Object<Tileview> {
+    protected:
+        explicit Tileview(lv_obj_t *other) noexcept: Object(other) {};
+
     public:
 
-        Tileview() : Object(lv_tileview_create(lv_scr_act(), nullptr)) {}
+        Tileview() noexcept: Object(lv_tileview_create(lv_scr_act(), nullptr)) {};
+
+        explicit Tileview(const Object<> &parent) noexcept
+                : Object(lv_tileview_create(parent.get(), nullptr)) {}
+
+        explicit Tileview(const Object<> &parent, const Tileview &copy) noexcept
+                : Object(lv_tileview_create(parent.get(), copy.get())) {}
 
         template<typename Element>
         Tileview &add_element(Element &element) {

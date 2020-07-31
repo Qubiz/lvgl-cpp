@@ -17,9 +17,18 @@ namespace lvglcpp {
     };
     
     class Table final : public Object<Table> {
+    protected:
+        explicit Table(lv_obj_t *other) noexcept: Object(other) {};
+
     public:
 
-        Table() : Object(lv_table_create(lv_scr_act(), nullptr)) {}
+        Table() noexcept: Object(lv_table_create(lv_scr_act(), nullptr)) {};
+
+        explicit Table(const Object<> &parent) noexcept
+                : Object(lv_table_create(parent.get(), nullptr)) {}
+
+        explicit Table(const Object<> &parent, const Table &copy) noexcept
+                : Object(lv_table_create(parent.get(), copy.get())) {}
 
         /*
          * SETTERS

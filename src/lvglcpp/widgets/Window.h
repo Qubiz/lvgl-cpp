@@ -14,11 +14,18 @@ namespace lvglcpp {
     };
 
     class Window final : public Object<Window> {
+    protected:
+        explicit Window(lv_obj_t *other) noexcept: Object(other) {};
+
     public:
 
-        Window() : Object(lv_win_create(lv_scr_act(), nullptr)) {}
+        Window() noexcept: Object(lv_win_create(lv_scr_act(), nullptr)) {};
 
-        explicit Window(lv_obj_t *window) : Object(window) {}
+        explicit Window(const Object<> &parent) noexcept
+                : Object(lv_win_create(parent.get(), nullptr)) {}
+
+        explicit Window(const Object<> &parent, const Window &copy) noexcept
+                : Object(lv_win_create(parent.get(), copy.get())) {}
 
         void clean() {
             return lv_win_clean(get());

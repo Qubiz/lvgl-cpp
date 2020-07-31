@@ -15,9 +15,18 @@ namespace lvglcpp {
     };
 
     class Textarea final : public Object<Textarea> {
+    protected:
+        explicit Textarea(lv_obj_t *other) noexcept: Object(other) {};
+
     public:
 
-        Textarea() : Object(lv_textarea_create(lv_scr_act(), nullptr)) {}
+        Textarea() noexcept: Object(lv_textarea_create(lv_scr_act(), nullptr)) {};
+
+        explicit Textarea(const Object<> &parent) noexcept
+                : Object(lv_textarea_create(parent.get(), nullptr)) {}
+
+        explicit Textarea(const Object<> &parent, const Textarea &copy) noexcept
+                : Object(lv_textarea_create(parent.get(), copy.get())) {}
 
         Textarea &add_char(uint32_t c) {
             lv_textarea_add_char(get(), c);

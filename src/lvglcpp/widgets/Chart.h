@@ -30,9 +30,18 @@ namespace lvglcpp {
     };
 
     class Chart final : public Object<Chart> {
+    protected:
+        explicit Chart(lv_obj_t *other) noexcept: Object(other) {};
+
     public:
 
-        Chart() : Object(lv_chart_create(lv_scr_act(), nullptr)) {}
+        Chart() noexcept: Object(lv_chart_create(lv_scr_act(), nullptr)) {};
+
+        explicit Chart(const Object<> &parent) noexcept
+                : Object(lv_chart_create(parent.get(), nullptr)) {}
+
+        explicit Chart(const Object<> &parent, const Chart &copy) noexcept
+                : Object(lv_chart_create(parent.get(), copy.get())) {}
 
         /*
          * ADD/REMOVE

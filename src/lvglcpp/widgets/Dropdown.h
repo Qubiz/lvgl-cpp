@@ -23,9 +23,18 @@ namespace lvglcpp {
     };
 
     class Dropdown final : public Object<Dropdown> {
+    protected:
+        explicit Dropdown(lv_obj_t *other) noexcept: Object(other) {};
+
     public:
 
-        Dropdown() : Object(lv_dropdown_create(lv_scr_act(), nullptr)) {}
+        Dropdown() noexcept: Object(lv_dropdown_create(lv_scr_act(), nullptr)) {};
+
+        explicit Dropdown(const Object<> &parent) noexcept
+                : Object(lv_dropdown_create(parent.get(), nullptr)) {}
+
+        explicit Dropdown(const Object<> &parent, const Dropdown &copy) noexcept
+                : Object(lv_dropdown_create(parent.get(), copy.get())) {}
 
         /*
          * SETTERS
