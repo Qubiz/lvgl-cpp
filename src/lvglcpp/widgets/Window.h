@@ -21,7 +21,7 @@ namespace lvglcpp {
         explicit Window(lv_obj_t *window) : Object(window) {}
 
         void clean() {
-            return  lv_win_clean(get());
+            return lv_win_clean(get());
         }
 
         Button add_btn_right(const void *img_src) {
@@ -83,34 +83,43 @@ namespace lvglcpp {
         /*
          * GETTERS
          */
-        const char * title() const {
+        [[nodiscard]] const char *title() const {
             return lv_win_get_title(get());
         }
-        lv_obj_t * content() const {
+
+        [[nodiscard]] lv_obj_t *content() const {
             return lv_win_get_content(get());
         }
-        lv_coord_t header_height() const {
+
+        [[nodiscard]] lv_coord_t header_height() const {
             return lv_win_get_header_height(get());
         }
-        lv_coord_t btn_width() const {
+
+        [[nodiscard]] lv_coord_t btn_width() const {
             return lv_win_get_btn_width(get());
         }
+
         static Window from_btn(Button &button) {
             return Window(lv_win_get_from_btn(button));
         }
-        lv_layout_t layout() const {
+
+        [[nodiscard]] lv_layout_t layout() const {
             return lv_win_get_layout(get());
         }
-        lv_scrollbar_mode_t sb_mode() const {
+
+        [[nodiscard]] lv_scrollbar_mode_t sb_mode() const {
             return lv_win_get_sb_mode(get());
         }
-        uint16_t anim_time() const {
+
+        [[nodiscard]] uint16_t anim_time() const {
             return lv_win_get_anim_time(get());
         }
-        lv_coord_t content_width() const {
+
+        [[nodiscard]] lv_coord_t content_width() const {
             return lv_win_get_width(get());
         }
-        bool draggable() const {
+
+        [[nodiscard]] bool draggable() const {
             return lv_win_get_drag(get());
         }
 
@@ -121,9 +130,11 @@ namespace lvglcpp {
         void focus(lv_obj_t *obj, lv_anim_enable_t anim_en) {
             return lv_win_focus(get(), obj, anim_en);
         }
+
         void scroll_hor(lv_coord_t dist) {
             return lv_win_scroll_hor(get(), dist);
         }
+
         void scroll_ver(lv_coord_t dist) {
             return lv_win_scroll_ver(get(), dist);
         }
