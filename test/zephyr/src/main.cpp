@@ -45,23 +45,22 @@ int lvgl_init(device *dev) {
     display = std::make_unique<ZephyrDisplayDriver<320, 240>>(display_device);
     display->initialize();
 
-    static lv_style_t style{};
-    lv_style_init(&style);
-
     constexpr auto COLOR_MAIN = LV_COLOR_MAKE(0x0C, 0xD5, 0xEA);
-    constexpr auto COLOR_GRAD = LV_COLOR_MAKE(0x47, 0x26, 0x70);
+
+    Style style{};
+    style
+            .style<prop::RADIUS>(0)
+            .style<prop::BORDER_WIDTH>(0)
+            .style<prop::PAD_ALL>(0)
+            .style<prop::BG_OPA>(LV_OPA_COVER)
+            .style<prop::BG_COLOR, ObjectState::FOCUSED>(COLOR_MAIN);
 
     Object<> background{};
     background
-            .add_style(&style)
+            .add_style(style)
             .size(LV_HOR_RES_MAX, LV_VER_RES_MAX)
             .pos(0, 0)
-            .style<prop::BG_OPA>(LV_OPA_COVER)
-            .style<prop::BG_COLOR>(COLOR_MAIN)
-            .style<prop::BG_GRAD_COLOR>(COLOR_GRAD)
-            .style<prop::BG_GRAD_DIR>(LV_GRAD_DIR_VER)
-            .style<prop::RADIUS>(0)
-            .style<prop::BORDER_WIDTH>(0);
+            .state(ObjectState::FOCUSED);
 
     return 0;
 }

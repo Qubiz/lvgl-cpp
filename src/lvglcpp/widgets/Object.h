@@ -38,16 +38,6 @@ namespace lvglcpp {
         ALL = LV_OBJ_PART_ALL
     };
 
-    enum class ObjectState {
-        DEFAULT = LV_STATE_DEFAULT,
-        CHECKED = LV_STATE_CHECKED,
-        FOCUSED = LV_STATE_FOCUSED,
-        EDITED = LV_STATE_EDITED,
-        HOVERED = LV_STATE_HOVERED,
-        PRESSED = LV_STATE_PRESSED,
-        DISABLED = LV_STATE_DISABLED,
-    };
-
     enum class ObjectAlign : lv_align_t {
         CENTER = LV_ALIGN_CENTER,
         IN_TOP_LEFT = LV_ALIGN_IN_TOP_LEFT,
@@ -189,12 +179,12 @@ namespace lvglcpp {
             return this->underlying();
         }
 
-        auto &add_style(lv_style_t *style, uint8_t part = LV_OBJ_PART_MAIN) {
+        auto &add_style(Style &style, uint8_t part = LV_OBJ_PART_MAIN) {
             lv_obj_add_style(get(), part, style);
             return this->underlying();
         }
 
-        auto &remove_style(lv_style_t *style, uint8_t part = LV_OBJ_PART_MAIN) {
+        auto &remove_style(Style &style, uint8_t part = LV_OBJ_PART_MAIN) {
             lv_obj_remove_style(get(), part, style);
             return this->underlying();
         }
@@ -285,18 +275,18 @@ namespace lvglcpp {
             return this->underlying();
         }
 
-        auto &state(lv_state_t state) {
-            lv_obj_set_state(get(), state);
+        auto &state(ObjectState state) {
+            lv_obj_set_state(get(), static_cast<lv_state_t>(state));
             return this->underlying();
         }
 
-        auto &addState(lv_state_t state) {
-            lv_obj_add_state(get(), state);
+        auto &addState(ObjectState state) {
+            lv_obj_add_state(get(), static_cast<lv_state_t>(state));
             return this->underlying();
         }
 
-        auto &clearState(lv_state_t state) {
-            lv_obj_clear_state(get(), state);
+        auto &clearState(ObjectState state) {
+            lv_obj_clear_state(get(), static_cast<lv_state_t>(state));
             return this->underlying();
         }
 
@@ -331,42 +321,6 @@ namespace lvglcpp {
             return this->underlying();
         }
 
-        auto &style_pad_all(lv_style_int_t value, uint8_t part = LV_OBJ_PART_MAIN,
-                            ObjectState state = ObjectState::DEFAULT) {
-            lv_obj_set_style_local_pad_all(get(), part, state, value);
-            return this->underlying();
-        }
-
-        auto &style_pad_hor(lv_style_int_t value, uint8_t part = LV_OBJ_PART_MAIN,
-                            ObjectState state = ObjectState::DEFAULT) {
-            lv_obj_set_style_local_pad_hor(get(), part, state, value);
-            return this->underlying();
-        }
-
-        auto &style_pad_ver(lv_style_int_t value, uint8_t part = LV_OBJ_PART_MAIN,
-                            ObjectState state = ObjectState::DEFAULT) {
-            lv_obj_set_style_local_pad_ver(get(), part, state, value);
-            return this->underlying();
-        }
-
-        auto &style_margin_all(lv_style_int_t value, uint8_t part = LV_OBJ_PART_MAIN,
-                               ObjectState state = ObjectState::DEFAULT) {
-            lv_obj_set_style_local_margin_all(get(), part, state, value);
-            return this->underlying();
-        }
-
-        auto &style_margin_hor(lv_style_int_t value, uint8_t part = LV_OBJ_PART_MAIN,
-                               ObjectState state = ObjectState::DEFAULT) {
-            lv_obj_set_style_local_margin_hor(get(), part, state, value);
-            return this->underlying();
-        }
-
-        auto &style_margin_ver(lv_style_int_t value, uint8_t part = LV_OBJ_PART_MAIN,
-                               ObjectState state = ObjectState::DEFAULT) {
-            lv_obj_set_style_local_margin_ver(get(), part, state, value);
-            return this->underlying();
-        }
-
         auto &design_callback(lv_design_cb_t callback) {
             lv_obj_set_design_cb(get(), callback);
             return this->underlying();
@@ -394,14 +348,22 @@ namespace lvglcpp {
             return Object(lv_obj_get_parent(get()));
         }
 
-        template<typename T>
-        [[nodiscard]] auto child(const Object<T> *child = nullptr) const {
-            return Object(lv_obj_get_child(get(), child->get()));
+        [[nodiscard]] auto child() const {
+            return Object(lv_obj_get_child(get(), nullptr));
         }
 
-        template<typename T>
-        [[nodiscard]] auto child_back(const Object<T> *child = nullptr) const {
-            return Object(lv_obj_get_parent(get(), child->get()));
+        template <typename ObjectType>
+        [[nodiscard]] auto child(const ObjectType & child) const {
+            return Object(lv_obj_get_child(get(), child.get()));
+        }
+
+        [[nodiscard]] auto child_back() const {
+            return Object(lv_obj_get_parent(get(), nullptr));
+        }
+
+        template <typename ObjectType>
+        [[nodiscard]] auto child_back(const ObjectType & child) const {
+            return Object(lv_obj_get_parent(get(), child.get()));
         }
 
         [[nodiscard]] auto count_children() const {
@@ -669,9 +631,8 @@ namespace lvglcpp {
             return lv_debug_check_obj_valid(get());
         }
 
-        template<typename StyleProperty>
-        auto &style(typename StyleProperty::value_type value, uint8_t part = LV_OBJ_PART_MAIN,
-                    ObjectState state = ObjectState::DEFAULT) {
+        template<typename StyleProperty, ObjectState state = ObjectState::DEFAULT>
+        auto &style(typename StyleProperty::value_type value, uint8_t part = LV_OBJ_PART_MAIN) {
             StyleProperty::set_value(get(), value, part, static_cast<lv_state_t>(state));
             return this->underlying();
         }
