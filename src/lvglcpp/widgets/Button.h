@@ -28,6 +28,8 @@ namespace lvglcpp {
 
     public:
 
+        Button(Button &&move) = default;
+
         Button() noexcept: Object(lv_btn_create(lv_scr_act(), nullptr)) {};
 
         explicit Button(const Object<> &parent) noexcept
