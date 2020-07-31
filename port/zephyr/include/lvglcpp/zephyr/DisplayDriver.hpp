@@ -132,6 +132,13 @@ namespace lvglcpp {
             };
         }
 
+        void blanking(bool enabled) {
+            if (enabled) {
+                display_blanking_on(display_device_);
+            } else {
+                display_blanking_off(display_device_);
+            }
+        }
 
     private:
         device *display_device_;

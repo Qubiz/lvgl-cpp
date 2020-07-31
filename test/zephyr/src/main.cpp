@@ -6,6 +6,8 @@
 #include <lvglcpp/zephyr/DisplayDriver.hpp>
 #include <lvglcpp/LVGLCPP.h>
 
+#include "vr_logo.h"
+
 #include <logging/log.h>
 
 #include <memory>
@@ -14,10 +16,10 @@ LOG_MODULE_REGISTER(MAIN, LOG_LEVEL_DBG);
 
 using namespace lvglcpp;
 
-device *display_device = nullptr;
+std::unique_ptr<ZephyrDisplayDriver<320, 240>> display;
 
 void main() {
-    display_blanking_off(display_device);
+    display->blanking(false);
 
     while (true) {
         lv_task_handler();
@@ -25,15 +27,13 @@ void main() {
     }
 }
 
-std::unique_ptr<ZephyrDisplayDriver<320, 240>> display;
-
 extern "C" inline int lvgl_init(device *);
 
 int lvgl_init(device *dev) {
 
     LOG_DBG("LVGL Initialization...");
 
-    display_device = device_get_binding("DISPLAY");
+    auto display_device = device_get_binding("DISPLAY");
 
     if (display_device == nullptr) {
         LOG_ERR("Unable to find display device...");
@@ -49,18 +49,24 @@ int lvgl_init(device *dev) {
 
     Style style{};
     style
-            .style<prop::RADIUS>(0)
-            .style<prop::BORDER_WIDTH>(0)
-            .style<prop::PAD_ALL>(0)
             .style<prop::BG_OPA>(LV_OPA_COVER)
-            .style<prop::BG_COLOR, ObjectState::FOCUSED>(COLOR_MAIN);
+            .style<prop::BG_COLOR>(COLOR_MAIN)
+            .style<prop::RADIUS>(0)
+            .style<prop::BORDER_WIDTH>(0);
+
 
     Object<> background{};
     background
             .add_style(style)
             .size(LV_HOR_RES_MAX, LV_VER_RES_MAX)
-            .pos(0, 0)
-            .state(ObjectState::FOCUSED);
+            .pos(0, 0);
+
+    Image image;
+    image
+            .set_antialias(true)
+            .align(ObjectAlign::CENTER);
+
+//    display->orientation(Orientation::ROTATED_180);
 
     return 0;
 }
