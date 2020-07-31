@@ -41,9 +41,8 @@ namespace lvglcpp {
             lv_list_clean(get());
         }
 
-        List &add_btn(const void *img_src, const char *txt) {
-            lv_list_add_btn(get(), img_src, txt);
-            return this->underlying();
+        Button add_btn(const void *img_src, const char *txt) {
+            return Button(lv_list_add_btn(get(), img_src, txt));
         }
 
         [[nodiscard]] bool remove(uint16_t index) const {

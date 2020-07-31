@@ -6,8 +6,6 @@
 #include <lvglcpp/zephyr/DisplayDriver.hpp>
 #include <lvglcpp/LVGLCPP.h>
 
-#include "vr_logo.h"
-
 #include <logging/log.h>
 
 #include <memory>
@@ -65,8 +63,6 @@ int lvgl_init(device *dev) {
     image
             .set_antialias(true)
             .align(ObjectAlign::CENTER);
-
-//    display->orientation(Orientation::ROTATED_180);
 
     return 0;
 }
