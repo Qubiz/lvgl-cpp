@@ -2,6 +2,7 @@
 
 #include <lvglcpp/hal/DisplayDriver.h>
 #include <device.h>
+#include <drivers/display.h>
 
 namespace lvglcpp {
 
