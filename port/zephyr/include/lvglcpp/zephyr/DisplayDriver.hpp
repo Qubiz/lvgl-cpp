@@ -1,6 +1,7 @@
 #pragma once
 
 #include <lvglcpp/hal/DisplayDriver.h>
+#include <device.h>
 
 namespace lvglcpp {
 
