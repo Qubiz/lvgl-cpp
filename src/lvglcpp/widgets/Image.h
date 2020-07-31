@@ -23,7 +23,8 @@ namespace lvglcpp {
                 : Object(lv_img_create(parent.get(), copy.get())) {}
 
         // Image specific constructors
-        explicit Image(const lv_img_dsc_t &source) noexcept {
+        explicit Image(const lv_img_dsc_t &source) noexcept
+                : Image() {
             set_src(source);
         }
 
