@@ -41,7 +41,7 @@ namespace lvglcpp {
             lv_list_clean(get());
         }
 
-        Button add_btn(const void *img_src, const char *txt) {
+        Button add_btn(const void *img_src = nullptr, const char *txt = nullptr) {
             return Button(lv_list_add_btn(get(), img_src, txt));
         }
 
@@ -49,7 +49,7 @@ namespace lvglcpp {
             return lv_list_remove(get(), index);
         }
 
-        List &focus_btn(lv_obj_t *btn) {
+        List &focus_btn(Button &btn) {
             lv_list_focus_btn(get(), btn);
             return this->underlying();
         }
