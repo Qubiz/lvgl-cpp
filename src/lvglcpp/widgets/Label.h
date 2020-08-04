@@ -136,10 +136,6 @@ namespace lvglcpp {
             return lv_label_get_text_sel_end(get());
         }
 
-        lv_style_list_t *style(LabelPart type) {
-            return lv_label_get_style(get(), static_cast<lv_label_part_t>(type));
-        }
-
         auto &ins_text(uint32_t pos, const char *text) {
             lv_label_ins_text(get(), pos, text);
             return this->underlying();
