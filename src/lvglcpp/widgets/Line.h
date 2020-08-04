@@ -4,6 +4,8 @@
 
 #if LV_USE_LINE
 
+#include <span>
+
 namespace lvglcpp {
 
     enum class LinePart : lv_line_style_t {
