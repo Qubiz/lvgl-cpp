@@ -34,10 +34,12 @@ namespace lvglcpp {
 
         Button() noexcept: Object(lv_btn_create(lv_scr_act(), nullptr)) {};
 
-        explicit Button(const Object<> &parent) noexcept
+        template<typename T>
+        explicit Button(const Object<T> &parent) noexcept
                 : Object(lv_btn_create(parent.get(), nullptr)) {}
 
-        explicit Button(const Object<> &parent, const Button &copy) noexcept
+        template<typename T>
+        explicit Button(const Object<T> &parent, const Button &copy) noexcept
                 : Object(lv_btn_create(parent.get(), copy.get())) {}
 
         /*

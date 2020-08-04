@@ -36,13 +36,25 @@ namespace lvglcpp {
 
         Label() noexcept: Object(lv_label_create(lv_scr_act(), nullptr)) {};
 
-        explicit Label(const Object<> &parent) noexcept
+        template<typename T>
+        explicit Label(const Object <T> &parent) noexcept
                 : Object(lv_label_create(parent.get(), nullptr)) {}
 
-        explicit Label(const Object<> &parent, const Label &copy) noexcept
+        template<typename T>
+        explicit Label(const Object <T> &parent, const Label &copy) noexcept
                 : Object(lv_label_create(parent.get(), copy.get())) {}
 
         explicit Label(const char *txt) : Label() {
+            text(txt);
+        }
+
+        template<typename T>
+        explicit Label(const char *txt, const Object <T> &parent) : Label(parent) {
+            text(txt);
+        }
+
+        template<typename T>
+        explicit Label(const char *txt, const Object <T> &parent, const Label &copy) : Label(parent, copy) {
             text(txt);
         }
 

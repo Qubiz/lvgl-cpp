@@ -14,7 +14,7 @@ namespace lvglcpp {
     class Spinbox final : public Object<Spinbox> {
     public:
         static constexpr uint8_t MAX_DIGIT_COUNT = LV_SPINBOX_MAX_DIGIT_COUNT;
-        
+
     protected:
         explicit Spinbox(lv_obj_t *other) noexcept: Object(other) {};
 
@@ -22,10 +22,12 @@ namespace lvglcpp {
 
         Spinbox() noexcept: Object(lv_spinbox_create(lv_scr_act(), nullptr)) {};
 
-        explicit Spinbox(const Object<> &parent) noexcept
+        template<typename T>
+        explicit Spinbox(const Object <T> &parent) noexcept
                 : Object(lv_spinbox_create(parent.get(), nullptr)) {}
 
-        explicit Spinbox(const Object<> &parent, const Spinbox &copy) noexcept
+        template<typename T>
+        explicit Spinbox(const Object <T> &parent, const Spinbox &copy) noexcept
                 : Object(lv_spinbox_create(parent.get(), copy.get())) {}
 
         /*
@@ -80,12 +82,15 @@ namespace lvglcpp {
         void step_next() {
             return lv_spinbox_step_next(get());
         }
+
         void step_prev() {
             return lv_spinbox_step_prev(get());
         }
+
         void increment() {
             return lv_spinbox_increment(get());
         }
+
         void decrement() {
             return lv_spinbox_decrement(get());
         }

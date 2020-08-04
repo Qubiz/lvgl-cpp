@@ -21,7 +21,7 @@ namespace lvglcpp {
         BG = LV_BTNMATRIX_PART_BG,
         BTN = LV_BTNMATRIX_PART_BTN
     };
-    
+
     class ButtonMatrix final : public Object<ButtonMatrix> {
     protected:
         explicit ButtonMatrix(lv_obj_t *other) noexcept: Object(other) {};
@@ -30,10 +30,12 @@ namespace lvglcpp {
 
         ButtonMatrix() noexcept: Object(lv_btnmatrix_create(lv_scr_act(), nullptr)) {};
 
-        explicit ButtonMatrix(const Object<> &parent) noexcept
+        template<typename T>
+        explicit ButtonMatrix(const Object<T> &parent) noexcept
                 : Object(lv_btnmatrix_create(parent.get(), nullptr)) {}
 
-        explicit ButtonMatrix(const Object<> &parent, const ButtonMatrix &copy) noexcept
+        template<typename T>
+        explicit ButtonMatrix(const Object<T> &parent, const ButtonMatrix &copy) noexcept
                 : Object(lv_btnmatrix_create(parent.get(), copy.get())) {}
 
         /*
@@ -108,27 +110,27 @@ namespace lvglcpp {
             return lv_btnmatrix_get_map_array(get());
         }
 
-        [[nodiscard]] bool recolor() const{
+        [[nodiscard]] bool recolor() const {
             return lv_btnmatrix_get_recolor(get());
         }
 
-        [[nodiscard]] uint16_t active_btn() const{
+        [[nodiscard]] uint16_t active_btn() const {
             return lv_btnmatrix_get_active_btn(get());
         }
 
-        [[nodiscard]] const char *active_btn_text() const{
+        [[nodiscard]] const char *active_btn_text() const {
             return lv_btnmatrix_get_active_btn_text(get());
         }
 
-        [[nodiscard]] uint16_t focused_btn() const{
+        [[nodiscard]] uint16_t focused_btn() const {
             return lv_btnmatrix_get_focused_btn(get());
         }
 
-        [[nodiscard]] const char *btn_text(uint16_t id) const{
+        [[nodiscard]] const char *btn_text(uint16_t id) const {
             return lv_btnmatrix_get_active_btn_text(get());
         }
 
-        [[nodiscard]] bool btn_ctrl(uint16_t id, lv_btnmatrix_ctrl_t ctrl) const{
+        [[nodiscard]] bool btn_ctrl(uint16_t id, lv_btnmatrix_ctrl_t ctrl) const {
             return lv_btnmatrix_get_btn_ctrl(get(), id, ctrl);
         }
 

@@ -18,10 +18,12 @@ namespace lvglcpp {
 
         Led() noexcept: Object(lv_led_create(lv_scr_act(), nullptr)) {};
 
-        explicit Led(const Object<> &parent) noexcept
+        template<typename T>
+        explicit Led(const Object <T> &parent) noexcept
                 : Object(lv_led_create(parent.get(), nullptr)) {}
 
-        explicit Led(const Object<> &parent, const Led &copy) noexcept
+        template<typename T>
+        explicit Led(const Object <T> &parent, const Led &copy) noexcept
                 : Object(lv_led_create(parent.get(), copy.get())) {}
 
         /*
@@ -29,7 +31,7 @@ namespace lvglcpp {
          */
 
         Led &bright(uint8_t brightness) {
-            lv_led_set_bright(get(),brightness);
+            lv_led_set_bright(get(), brightness);
             return this->underlying();
         }
 

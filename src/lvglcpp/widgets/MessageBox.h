@@ -23,10 +23,12 @@ namespace lvglcpp {
 
         MessageBox() noexcept: Object(lv_msgbox_create(lv_scr_act(), nullptr)) {};
 
-        explicit MessageBox(const Object<> &parent) noexcept
+        template<typename T>
+        explicit MessageBox(const Object<T> &parent) noexcept
                 : Object(lv_msgbox_create(parent.get(), nullptr)) {}
 
-        explicit MessageBox(const Object<> &parent, const MessageBox &copy) noexcept
+        template<typename T>
+        explicit MessageBox(const Object<T> &parent, const MessageBox &copy) noexcept
                 : Object(lv_msgbox_create(parent.get(), copy.get())) {}
 
         MessageBox &add_btns(std::span<const char *> actions_map) {

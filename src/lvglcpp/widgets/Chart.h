@@ -37,10 +37,12 @@ namespace lvglcpp {
 
         Chart() noexcept: Object(lv_chart_create(lv_scr_act(), nullptr)) {};
 
-        explicit Chart(const Object<> &parent) noexcept
+        template<typename T>
+        explicit Chart(const Object <T> &parent) noexcept
                 : Object(lv_chart_create(parent.get(), nullptr)) {}
 
-        explicit Chart(const Object<> &parent, const Chart &copy) noexcept
+        template<typename T>
+        explicit Chart(const Object <T> &parent, const Chart &copy) noexcept
                 : Object(lv_chart_create(parent.get(), copy.get())) {}
 
         /*

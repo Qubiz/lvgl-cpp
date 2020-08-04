@@ -30,10 +30,12 @@ namespace lvglcpp {
 
         Tabview() noexcept: Object(lv_tabview_create(lv_scr_act(), nullptr)) {};
 
-        explicit Tabview(const Object<> &parent) noexcept
+        template<typename T>
+        explicit Tabview(const Object <T> &parent) noexcept
                 : Object(lv_tabview_create(parent.get(), nullptr)) {}
 
-        explicit Tabview(const Object<> &parent, const Tabview &copy) noexcept
+        template<typename T>
+        explicit Tabview(const Object <T> &parent, const Tabview &copy) noexcept
                 : Object(lv_tabview_create(parent.get(), copy.get())) {}
 
         Tabview add_tab(const char *name) {

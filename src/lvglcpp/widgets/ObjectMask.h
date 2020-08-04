@@ -19,10 +19,12 @@ namespace lvglcpp {
 
         ObjectMask() noexcept: Object(lv_objmask_create(lv_scr_act(), nullptr)) {};
 
-        explicit ObjectMask(const Object<> &parent) noexcept
+        template<typename T>
+        explicit ObjectMask(const Object <T> &parent) noexcept
                 : Object(lv_objmask_create(parent.get(), nullptr)) {}
 
-        explicit ObjectMask(const Object<> &parent, const ObjectMask &copy) noexcept
+        template<typename T>
+        explicit ObjectMask(const Object <T> &parent, const ObjectMask &copy) noexcept
                 : Object(lv_objmask_create(parent.get(), copy.get())) {}
 
         lv_objmask_mask_t *add(void *params) {

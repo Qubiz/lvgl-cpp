@@ -14,10 +14,12 @@ namespace lvglcpp {
 
         Arc() noexcept: Object(lv_arc_create(lv_scr_act(), nullptr)) {};
 
-        explicit Arc(const Object<> &parent) noexcept
+        template<typename T>
+        explicit Arc(const Object<T> &parent) noexcept
                 : Object(lv_arc_create(parent.get(), nullptr)) {}
 
-        explicit Arc(const Object<> &parent, const Arc &copy) noexcept
+        template<typename T>
+        explicit Arc(const Object<T> &parent, const Arc &copy) noexcept
                 : Object(lv_arc_create(parent.get(), copy.get())) {}
 
         /*

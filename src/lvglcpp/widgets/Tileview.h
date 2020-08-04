@@ -20,10 +20,12 @@ namespace lvglcpp {
 
         Tileview() noexcept: Object(lv_tileview_create(lv_scr_act(), nullptr)) {};
 
-        explicit Tileview(const Object<> &parent) noexcept
+        template<typename T>
+        explicit Tileview(const Object <T> &parent) noexcept
                 : Object(lv_tileview_create(parent.get(), nullptr)) {}
 
-        explicit Tileview(const Object<> &parent, const Tileview &copy) noexcept
+        template<typename T>
+        explicit Tileview(const Object <T> &parent, const Tileview &copy) noexcept
                 : Object(lv_tileview_create(parent.get(), copy.get())) {}
 
         template<typename Element>

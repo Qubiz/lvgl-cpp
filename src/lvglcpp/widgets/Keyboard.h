@@ -26,10 +26,12 @@ namespace lvglcpp {
 
         Keyboard() noexcept: Object(lv_keyboard_create(lv_scr_act(), nullptr)) {};
 
-        explicit Keyboard(const Object<> &parent) noexcept
+        template<typename T>
+        explicit Keyboard(const Object <T> &parent) noexcept
                 : Object(lv_keyboard_create(parent.get(), nullptr)) {}
 
-        explicit Keyboard(const Object<> &parent, const Keyboard &copy) noexcept
+        template<typename T>
+        explicit Keyboard(const Object <T> &parent, const Keyboard &copy) noexcept
                 : Object(lv_keyboard_create(parent.get(), copy.get())) {}
 
         /*

@@ -31,10 +31,12 @@ namespace lvglcpp {
 
         Spinner() noexcept: Object(lv_spinner_create(lv_scr_act(), nullptr)) {};
 
-        explicit Spinner(const Object<> &parent) noexcept
+        template<typename T>
+        explicit Spinner(const Object <T> &parent) noexcept
                 : Object(lv_spinner_create(parent.get(), nullptr)) {}
 
-        explicit Spinner(const Object<> &parent, const Spinner &copy) noexcept
+        template<typename T>
+        explicit Spinner(const Object <T> &parent, const Spinner &copy) noexcept
                 : Object(lv_spinner_create(parent.get(), copy.get())) {}
 
         /*
@@ -66,18 +68,21 @@ namespace lvglcpp {
          */
 
         [[nodiscard]] lv_anim_value_t arc_length() const {
-            return  lv_spinner_get_arc_length(get());
+            return lv_spinner_get_arc_length(get());
         }
+
         [[nodiscard]] uint16_t spin_time() const {
-            return  lv_spinner_get_spin_time(get());
+            return lv_spinner_get_spin_time(get());
         }
+
         [[nodiscard]] SpinnerType spinner_type() const {
             return static_cast<SpinnerType>(lv_spinner_get_type(get()));
         }
-        [[nodiscard]] SpinnerDirection dir(lv_obj_t * spinner) const {
+
+        [[nodiscard]] SpinnerDirection dir(lv_obj_t *spinner) const {
             return static_cast<SpinnerDirection>(lv_spinner_get_dir(get()));
         }
-        
+
     };
 }
 

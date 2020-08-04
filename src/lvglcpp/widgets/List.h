@@ -28,10 +28,12 @@ namespace lvglcpp {
 
         List() noexcept: Object(lv_list_create(lv_scr_act(), nullptr)) {};
 
-        explicit List(const Object<> &parent) noexcept
+        template<typename T>
+        explicit List(const Object<T> &parent) noexcept
                 : Object(lv_list_create(parent.get(), nullptr)) {}
 
-        explicit List(const Object<> &parent, const List &copy) noexcept
+        template<typename T>
+        explicit List(const Object<T> &parent, const List &copy) noexcept
                 : Object(lv_list_create(parent.get(), copy.get())) {}
 
         /*
@@ -112,10 +114,13 @@ namespace lvglcpp {
         [[nodiscard]] uint16_t size() const {
             return lv_list_get_size(get());
         }
+
 #if LV_USE_GROUP
+
         [[nodiscard]] Button btn_selected() const {
             return Button(lv_list_get_btn_selected(get()));
         }
+
 #endif
 
         [[nodiscard]] lv_layout_t layout() const {
@@ -150,7 +155,7 @@ namespace lvglcpp {
             lv_list_down(get());
         }
 
-        static void focus(const Button& button, lv_anim_enable_t anim = LV_ANIM_OFF) {
+        static void focus(const Button &button, lv_anim_enable_t anim = LV_ANIM_OFF) {
             lv_list_focus(button.get(), anim);
         }
 

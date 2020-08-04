@@ -31,10 +31,12 @@ namespace lvglcpp {
 
         Bar() noexcept: Object(lv_bar_create(lv_scr_act(), nullptr)) {};
 
-        explicit Bar(const Object<> &parent) noexcept
+        template<typename T>
+        explicit Bar(const Object<T> &parent) noexcept
                 : Object(lv_bar_create(parent.get(), nullptr)) {}
 
-        explicit Bar(const Object<> &parent, const Bar &copy) noexcept
+        template<typename T>
+        explicit Bar(const Object<T> &parent, const Bar &copy) noexcept
                 : Object(lv_bar_create(parent.get(), copy.get())) {}
 
         /*

@@ -18,10 +18,12 @@ namespace lvglcpp {
 
         Linemeter() noexcept: Object(lv_linemeter_create(lv_scr_act(), nullptr)) {};
 
-        explicit Linemeter(const Object<> &parent) noexcept
+        template<typename T>
+        explicit Linemeter(const Object <T> &parent) noexcept
                 : Object(lv_linemeter_create(parent.get(), nullptr)) {}
 
-        explicit Linemeter(const Object<> &parent, const Linemeter &copy) noexcept
+        template<typename T>
+        explicit Linemeter(const Object <T> &parent, const Linemeter &copy) noexcept
                 : Object(lv_linemeter_create(parent.get(), copy.get())) {}
 
         /*
@@ -85,9 +87,10 @@ namespace lvglcpp {
          * OTHER
          */
 
-        void draw_scale(const lv_area_t * clip_area, LinemeterPart part) {
+        void draw_scale(const lv_area_t *clip_area, LinemeterPart part) {
             lv_linemeter_draw_scale(get(), clip_area, static_cast<uint8_t>(part));
         }
+
         void mirror() {
             lv_linemeter_get_mirror(get());
         }

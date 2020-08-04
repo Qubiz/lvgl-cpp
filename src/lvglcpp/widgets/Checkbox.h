@@ -21,10 +21,12 @@ namespace lvglcpp {
 
         Checkbox() noexcept: Object(lv_checkbox_create(lv_scr_act(), nullptr)) {};
 
-        explicit Checkbox(const Object<> &parent) noexcept
+        template<typename T>
+        explicit Checkbox(const Object <T> &parent) noexcept
                 : Object(lv_checkbox_create(parent.get(), nullptr)) {}
 
-        explicit Checkbox(const Object<> &parent, const Checkbox &copy) noexcept
+        template<typename T>
+        explicit Checkbox(const Object <T> &parent, const Checkbox &copy) noexcept
                 : Object(lv_checkbox_create(parent.get(), copy.get())) {}
 
         /*

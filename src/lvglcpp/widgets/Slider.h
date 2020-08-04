@@ -11,13 +11,13 @@ namespace lvglcpp {
         SYMMETRICAL = LV_SLIDER_TYPE_SYMMETRICAL,
         RANGE = LV_SLIDER_TYPE_RANGE
     };
-    
+
     enum class SliderPart : uint8_t {
         BG = LV_SLIDER_PART_BG, /** Slider background style. */
         INDIC = LV_SLIDER_PART_INDIC, /** Slider indicator (filled area) style. */
         KNOB = LV_SLIDER_PART_KNOB, /** Slider knob style. */
     };
-    
+
     class Slider final : public Object<Slider> {
     protected:
         explicit Slider(lv_obj_t *other) noexcept: Object(other) {};
@@ -26,10 +26,12 @@ namespace lvglcpp {
 
         Slider() noexcept: Object(lv_slider_create(lv_scr_act(), nullptr)) {};
 
-        explicit Slider(const Object<> &parent) noexcept
+        template<typename T>
+        explicit Slider(const Object<T> &parent) noexcept
                 : Object(lv_slider_create(parent.get(), nullptr)) {}
 
-        explicit Slider(const Object<> &parent, const Slider &copy) noexcept
+        template<typename T>
+        explicit Slider(const Object<T> &parent, const Slider &copy) noexcept
                 : Object(lv_slider_create(parent.get(), copy.get())) {}
 
         /*
@@ -92,7 +94,7 @@ namespace lvglcpp {
         [[nodiscard]] bool is_dragged() const {
             return lv_slider_is_dragged(get());
         }
-        
+
     };
 }
 

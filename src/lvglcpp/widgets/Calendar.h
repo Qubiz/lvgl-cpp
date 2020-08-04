@@ -23,10 +23,12 @@ namespace lvglcpp {
 
         Calendar() noexcept: Object(lv_calendar_create(lv_scr_act(), nullptr)) {};
 
-        explicit Calendar(const Object<> &parent) noexcept
+        template<typename T>
+        explicit Calendar(const Object<T> &parent) noexcept
                 : Object(lv_calendar_create(parent.get(), nullptr)) {}
 
-        explicit Calendar(const Object<> &parent, const Calendar &copy) noexcept
+        template<typename T>
+        explicit Calendar(const Object<T> &parent, const Calendar &copy) noexcept
                 : Object(lv_calendar_create(parent.get(), copy.get())) {}
 
         /*
@@ -88,11 +90,11 @@ namespace lvglcpp {
                              lv_calendar_get_highlighted_dates_num(get()));
         }
 
-        [[nodiscard]] std::span<const char *,7> day_names() const {
+        [[nodiscard]] std::span<const char *, 7> day_names() const {
             return std::span<const char *, 7>(lv_calendar_get_day_names(get()), 7);
         };
 
-        [[nodiscard]] std::span<const char *,12>month_names() const {
+        [[nodiscard]] std::span<const char *, 12> month_names() const {
             return std::span<const char *, 12>(lv_calendar_get_month_names(get()), 7);
         };
     };

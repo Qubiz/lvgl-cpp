@@ -21,10 +21,12 @@ namespace lvglcpp {
 
         Window() noexcept: Object(lv_win_create(lv_scr_act(), nullptr)) {};
 
-        explicit Window(const Object<> &parent) noexcept
+        template<typename T>
+        explicit Window(const Object <T> &parent) noexcept
                 : Object(lv_win_create(parent.get(), nullptr)) {}
 
-        explicit Window(const Object<> &parent, const Window &copy) noexcept
+        template<typename T>
+        explicit Window(const Object <T> &parent, const Window &copy) noexcept
                 : Object(lv_win_create(parent.get(), copy.get())) {}
 
         void clean() {
@@ -42,7 +44,6 @@ namespace lvglcpp {
         /*
          * SETTERS
          */
-
         static void close_event_cb(Button &close_button, lv_event_t event) {
             lv_win_close_event_cb(close_button, event);
         }

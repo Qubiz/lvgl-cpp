@@ -16,10 +16,12 @@ namespace lvglcpp {
 
         Image() noexcept: Object(lv_img_create(lv_scr_act(), nullptr)) {};
 
-        explicit Image(const Object<> &parent) noexcept
+        template<typename T>
+        explicit Image(const Object <T> &parent) noexcept
                 : Object(lv_img_create(parent.get(), nullptr)) {}
 
-        explicit Image(const Object<> &parent, const Image &copy) noexcept
+        template<typename T>
+        explicit Image(const Object <T> &parent, const Image &copy) noexcept
                 : Object(lv_img_create(parent.get(), copy.get())) {}
 
         // Image specific constructors
@@ -28,12 +30,14 @@ namespace lvglcpp {
             set_src(source);
         }
 
-        explicit Image(const lv_img_dsc_t &source, const Object<> &parent) noexcept
+        template<typename T>
+        explicit Image(const lv_img_dsc_t &source, const Object <T> &parent) noexcept
                 : Image(parent) {
             set_src(source);
         }
 
-        explicit Image(const lv_img_dsc_t &source, const Object<> &parent, const Image &copy) noexcept
+        template<typename T>
+        explicit Image(const lv_img_dsc_t &source, const Object <T> &parent, const Image &copy) noexcept
                 : Image(parent, copy) {
             set_src(source);
         }

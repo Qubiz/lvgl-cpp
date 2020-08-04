@@ -20,10 +20,12 @@ namespace lvglcpp {
 
         Line() noexcept: Object(lv_line_create(lv_scr_act(), nullptr)) {};
 
-        explicit Line(const Object<> &parent) noexcept
+        template<typename T>
+        explicit Line(const Object <T> &parent) noexcept
                 : Object(lv_line_create(parent.get(), nullptr)) {}
 
-        explicit Line(const Object<> &parent, const Line &copy) noexcept
+        template<typename T>
+        explicit Line(const Object <T> &parent, const Line &copy) noexcept
                 : Object(lv_line_create(parent.get(), copy.get())) {}
 
         /*
@@ -52,6 +54,7 @@ namespace lvglcpp {
         [[nodiscard]] bool auto_size() const {
             return lv_line_get_auto_size(get());
         }
+
         [[nodiscard]] bool y_invert() const {
             return lv_line_get_y_invert(get());
         }

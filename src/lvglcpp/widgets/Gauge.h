@@ -22,10 +22,12 @@ namespace lvglcpp {
 
         Gauge() noexcept: Object(lv_gauge_create(lv_scr_act(), nullptr)) {};
 
-        explicit Gauge(const Object<> &parent) noexcept
+        template<typename T>
+        explicit Gauge(const Object <T> &parent) noexcept
                 : Object(lv_gauge_create(parent.get(), nullptr)) {}
 
-        explicit Gauge(const Object<> &parent, const Gauge &copy) noexcept
+        template<typename T>
+        explicit Gauge(const Object <T> &parent, const Gauge &copy) noexcept
                 : Object(lv_gauge_create(parent.get(), copy.get())) {}
 
         /*

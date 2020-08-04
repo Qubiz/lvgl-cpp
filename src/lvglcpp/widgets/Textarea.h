@@ -22,10 +22,12 @@ namespace lvglcpp {
 
         Textarea() noexcept: Object(lv_textarea_create(lv_scr_act(), nullptr)) {};
 
-        explicit Textarea(const Object<> &parent) noexcept
+        template<typename T>
+        explicit Textarea(const Object<T> &parent) noexcept
                 : Object(lv_textarea_create(parent.get(), nullptr)) {}
 
-        explicit Textarea(const Object<> &parent, const Textarea &copy) noexcept
+        template<typename T>
+        explicit Textarea(const Object<T> &parent, const Textarea &copy) noexcept
                 : Object(lv_textarea_create(parent.get(), copy.get())) {}
 
         Textarea &add_char(uint32_t c) {
@@ -150,38 +152,47 @@ namespace lvglcpp {
             lv_textarea_set_cursor_blink_time(get(), time);
             return this->underlying();
         }
-        
+
         /*
          * GETTERS
          */
 
-        [[nodiscard]] const char * text() const {
+        [[nodiscard]] const char *text() const {
             return lv_textarea_get_text(get());
         }
-        [[nodiscard]] const char * placeholder_text() const {
+
+        [[nodiscard]] const char *placeholder_text() const {
             return lv_textarea_get_placeholder_text(get());
         }
-        [[nodiscard]] lv_obj_t * label() const {
+
+        [[nodiscard]] lv_obj_t *label() const {
             return lv_textarea_get_label(get());
         }
+
         [[nodiscard]] uint32_t cursor_pos() const {
             return lv_textarea_get_cursor_pos(get());
         }
+
         [[nodiscard]] bool cursor_hidden() const {
             return lv_textarea_get_cursor_hidden(get());
         }
+
         [[nodiscard]] bool cursor_click_pos() const {
             return lv_textarea_get_cursor_click_pos(get());
         }
+
         [[nodiscard]] bool pwd_mode() const {
             return lv_textarea_get_pwd_mode(get());
         }
+
         [[nodiscard]] bool one_line() const {
             return lv_textarea_get_one_line(get());
         }
-        [[nodiscard]] const char * accepted_chars() const {
+
+        [[nodiscard]] const char *accepted_chars() const {
             return lv_textarea_get_accepted_chars(get());
         }
+
         [[nodiscard]] uint32_t max_length() const {
             return lv_textarea_get_max_length(get());
         }
@@ -189,21 +200,27 @@ namespace lvglcpp {
         [[nodiscard]] lv_scrollbar_mode_t scrollbar_mode() const {
             return lv_textarea_get_scrollbar_mode(get());
         }
+
         [[nodiscard]] bool scroll_propagation() const {
             return lv_textarea_get_scroll_propagation(get());
         }
+
         [[nodiscard]] bool edge_flash() const {
             return lv_textarea_get_edge_flash(get());
         }
+
         [[nodiscard]] bool selected() const {
             return lv_textarea_text_is_selected(get());
         }
+
         [[nodiscard]] bool text_sel_en() const {
             return lv_textarea_get_text_sel_en(get());
         }
+
         [[nodiscard]] uint16_t pwd_show_time() const {
             return lv_textarea_get_pwd_show_time(get());
         }
+
         [[nodiscard]] uint16_t cursor_blink_time() const {
             return lv_textarea_get_cursor_blink_time(get());
         }
@@ -214,15 +231,19 @@ namespace lvglcpp {
         void clear_selection() {
             return lv_textarea_clear_selection(get());
         }
+
         void cursor_right() {
             return lv_textarea_cursor_right(get());
         }
+
         void cursor_left() {
             return lv_textarea_cursor_left(get());
         }
+
         void cursor_down() {
             return lv_textarea_cursor_down(get());
         }
+
         void cursor_up() {
             return lv_textarea_cursor_up(get());
         }

@@ -29,11 +29,11 @@ namespace lvglcpp {
     public:
 
         Dropdown() noexcept: Object(lv_dropdown_create(lv_scr_act(), nullptr)) {};
-
-        explicit Dropdown(const Object<> &parent) noexcept
+template<typename T>
+        explicit Dropdown(const Object<T> &parent) noexcept
                 : Object(lv_dropdown_create(parent.get(), nullptr)) {}
-
-        explicit Dropdown(const Object<> &parent, const Dropdown &copy) noexcept
+template<typename T>
+        explicit Dropdown(const Object<T> &parent, const Dropdown &copy) noexcept
                 : Object(lv_dropdown_create(parent.get(), copy.get())) {}
 
         /*

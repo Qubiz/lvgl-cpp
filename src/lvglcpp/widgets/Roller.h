@@ -26,10 +26,12 @@ namespace lvglcpp {
 
         Roller() noexcept: Object(lv_roller_create(lv_scr_act(), nullptr)) {};
 
-        explicit Roller(const Object<> &parent) noexcept
+        template<typename T>
+        explicit Roller(const Object <T> &parent) noexcept
                 : Object(lv_roller_create(parent.get(), nullptr)) {}
 
-        explicit Roller(const Object<> &parent, const Roller &copy) noexcept
+        template<typename T>
+        explicit Roller(const Object <T> &parent, const Roller &copy) noexcept
                 : Object(lv_roller_create(parent.get(), copy.get())) {}
 
         /*

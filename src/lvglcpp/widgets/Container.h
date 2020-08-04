@@ -39,11 +39,11 @@ namespace lvglcpp {
     public:
 
         Container() noexcept: Object(lv_cont_create(lv_scr_act(), nullptr)) {};
-
-        explicit Container(const Object<> &parent) noexcept
+template<typename T>
+        explicit Container(const Object<T> &parent) noexcept
                 : Object(lv_cont_create(parent.get(), nullptr)) {}
-
-        explicit Container(const Object<> &parent, const Container &copy) noexcept
+template<typename T>
+        explicit Container(const Object<T> &parent, const Container &copy) noexcept
                 : Object(lv_cont_create(parent.get(), copy.get())) {}
 
         /*

@@ -72,10 +72,12 @@ namespace lvglcpp {
     public:
         Object() noexcept: obj_(lv_obj_create(lv_scr_act(), nullptr)) {};
 
-        explicit Object(const Object<> &parent) noexcept
+        template<typename T>
+        explicit Object(const Object<T> &parent) noexcept
                 : obj_(lv_obj_create(parent.get(), nullptr)) {}
 
-        explicit Object(const Object<> &parent, const Object &copy) noexcept
+        template<typename T>
+        explicit Object(const Object<T> &parent, const Object &copy) noexcept
                 : obj_(lv_obj_create(parent.get(), copy.get())) {}
 
         operator lv_obj_t *() { return obj_; }
@@ -352,8 +354,8 @@ namespace lvglcpp {
             return Object(lv_obj_get_child(get(), nullptr));
         }
 
-        template <typename ObjectType>
-        [[nodiscard]] auto child(const ObjectType & child) const {
+        template<typename ObjectType>
+        [[nodiscard]] auto child(const ObjectType &child) const {
             return Object(lv_obj_get_child(get(), child.get()));
         }
 
@@ -361,8 +363,8 @@ namespace lvglcpp {
             return Object(lv_obj_get_parent(get(), nullptr));
         }
 
-        template <typename ObjectType>
-        [[nodiscard]] auto child_back(const ObjectType & child) const {
+        template<typename ObjectType>
+        [[nodiscard]] auto child_back(const ObjectType &child) const {
             return Object(lv_obj_get_parent(get(), child.get()));
         }
 

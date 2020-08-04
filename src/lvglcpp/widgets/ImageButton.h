@@ -20,10 +20,12 @@ namespace lvglcpp {
 
         ImageButton() noexcept: Object(lv_imgbtn_create(lv_scr_act(), nullptr)) {};
 
-        explicit ImageButton(const Object<> &parent) noexcept
+        template<typename T>
+        explicit ImageButton(const Object<T> &parent) noexcept
                 : Object(lv_imgbtn_create(parent.get(), nullptr)) {}
 
-        explicit ImageButton(const Object<> &parent, const ImageButton &copy) noexcept
+        template<typename T>
+        explicit ImageButton(const Object<T> &parent, const ImageButton &copy) noexcept
                 : Object(lv_imgbtn_create(parent.get(), copy.get())) {}
 
         /*
@@ -62,12 +64,14 @@ namespace lvglcpp {
          * GETTERS
          */
 
-        [[nodiscard]] const void * src(ButtonState state) const {
+        [[nodiscard]] const void *src(ButtonState state) const {
             return lv_imgbtn_get_src(get(), static_cast<lv_btn_state_t>(state));
         }
+
         [[nodiscard]] ButtonState state() const {
             return static_cast<ButtonState>(lv_imgbtn_get_state(get()));
         }
+
         [[nodiscard]] bool checkable() const {
             return lv_imgbtn_get_checkable(get());
         }

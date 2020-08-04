@@ -14,10 +14,12 @@ namespace lvglcpp {
 
         Canvas() noexcept: Object(lv_canvas_create(lv_scr_act(), nullptr)) {};
 
-        explicit Canvas(const Object<> &parent) noexcept
+        template<typename T>
+        explicit Canvas(const Object <T> &parent) noexcept
                 : Object(lv_canvas_create(parent.get(), nullptr)) {}
 
-        explicit Canvas(const Object<> &parent, const Canvas &copy) noexcept
+        template<typename T>
+        explicit Canvas(const Object <T> &parent, const Canvas &copy) noexcept
                 : Object(lv_canvas_create(parent.get(), copy.get())) {}
 
         /*

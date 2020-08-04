@@ -30,6 +30,40 @@ int main() {
             .pos(0, 0)
             .state(ObjectState::FOCUSED);
 
+    List list(background);
+
+    std::array<Button, 7> list_buttons{
+            Button(list.add_btn(nullptr, "Button 0")),
+            Button(list.add_btn(nullptr, "Button 1")),
+            Button(list.add_btn(nullptr, "Button 2")),
+            Button(list.add_btn(nullptr, "Button 3")),
+            Button(list.add_btn(nullptr, "Button 4")),
+            Button(list.add_btn(nullptr, "Button 5")),
+            Button(list.add_btn(nullptr, "Button 6")),
+    };
+
+    lv_task_create([](lv_task_t *task) {
+        static bool down = true;
+        auto list = reinterpret_cast<List *>(task->user_data);
+        Button button(list->btn_selected());
+        if (down) {
+            if (auto next = list->next_btn(button); next.has_value()) {
+                list->focus_btn(next.value());
+            } else {
+                down = false;
+            }
+        } else {
+            if (auto prev = list->prev_btn(button); prev.has_value()) {
+                list->focus_btn(prev.value());
+            } else {
+                down = true;
+            }
+        }
+
+    }, 1000, LV_TASK_PRIO_HIGHEST, &list);
+
+    list.focus_btn(list_buttons[0]);
+
     display.start(); // Blocking call
 
     return 0;
