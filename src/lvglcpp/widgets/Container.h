@@ -27,7 +27,7 @@ namespace lvglcpp {
         PARENT = LV_FIT_PARENT,
         MAX = LV_FIT_MAX,
     };
-    
+
     enum class ContainerPart {
         MAIN = LV_OBJ_PART_MAIN
     };
@@ -39,11 +39,13 @@ namespace lvglcpp {
     public:
 
         Container() noexcept: Object(lv_cont_create(lv_scr_act(), nullptr)) {};
-template<typename T>
-        explicit Container(const Object<T> &parent) noexcept
+
+        template<typename T>
+        explicit Container(const Object <T> &parent) noexcept
                 : Object(lv_cont_create(parent.get(), nullptr)) {}
-template<typename T>
-        explicit Container(const Object<T> &parent, const Container &copy) noexcept
+
+        template<typename T>
+        explicit Container(const Object <T> &parent, const Container &copy) noexcept
                 : Object(lv_cont_create(parent.get(), copy.get())) {}
 
         /*
@@ -57,7 +59,7 @@ template<typename T>
 
         Container &fit4(Fit left, Fit right, Fit top, Fit bottom) {
             lv_cont_set_fit4(get(), static_cast<lv_fit_t>(left), static_cast<lv_fit_t>(right),
-                            static_cast<lv_fit_t>(top), static_cast<lv_fit_t>(bottom));
+                             static_cast<lv_fit_t>(top), static_cast<lv_fit_t>(bottom));
             return this->underlying();
         }
 

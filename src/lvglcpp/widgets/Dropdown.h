@@ -29,11 +29,13 @@ namespace lvglcpp {
     public:
 
         Dropdown() noexcept: Object(lv_dropdown_create(lv_scr_act(), nullptr)) {};
-template<typename T>
-        explicit Dropdown(const Object<T> &parent) noexcept
+
+        template<typename T>
+        explicit Dropdown(const Object <T> &parent) noexcept
                 : Object(lv_dropdown_create(parent.get(), nullptr)) {}
-template<typename T>
-        explicit Dropdown(const Object<T> &parent, const Dropdown &copy) noexcept
+
+        template<typename T>
+        explicit Dropdown(const Object <T> &parent, const Dropdown &copy) noexcept
                 : Object(lv_dropdown_create(parent.get(), copy.get())) {}
 
         /*
@@ -94,30 +96,38 @@ template<typename T>
          * GETTERS
          */
 
-        [[nodiscard]] const char * text() const {
+        [[nodiscard]] const char *text() const {
             return lv_dropdown_get_text(get());
         }
-        [[nodiscard]] const char * options() const {
+
+        [[nodiscard]] const char *options() const {
             return lv_dropdown_get_options(get());
         }
+
         [[nodiscard]] uint16_t selected() const {
-            return  lv_dropdown_get_selected(get());
+            return lv_dropdown_get_selected(get());
         }
+
         [[nodiscard]] uint16_t option_cnt() const {
-            return  lv_dropdown_get_option_cnt(get());
+            return lv_dropdown_get_option_cnt(get());
         }
+
         void selected_str(std::span<char *> s) {
             return lv_dropdown_get_selected_str(get(), reinterpret_cast<char *>(s.data()), s.size());
         }
+
         [[nodiscard]] lv_coord_t max_height() const {
             return lv_dropdown_get_max_height(get());
         }
-        [[nodiscard]] const char * symbol() const {
+
+        [[nodiscard]] const char *symbol() const {
             return lv_dropdown_get_symbol(get());
         }
+
         [[nodiscard]] DropdownDirection dir() const {
             return static_cast<DropdownDirection>(lv_dropdown_get_dir(get()));
         }
+
         [[nodiscard]] bool show_selected() const {
             return lv_dropdown_get_show_selected(get());
         }
