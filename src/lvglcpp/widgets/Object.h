@@ -96,12 +96,12 @@ namespace lvglcpp {
             return this->underlying();
         }
 
-        auto &moveForeground() {
+        auto &move_foreground() {
             lv_obj_move_foreground(get());
             return this->underlying();
         }
 
-        auto &moveBackground() {
+        auto &move_background() {
             lv_obj_move_background(get());
             return this->underlying();
         }
@@ -282,19 +282,19 @@ namespace lvglcpp {
             return this->underlying();
         }
 
-        auto &addState(ObjectState state) {
+        auto &add_state(ObjectState state) {
             lv_obj_add_state(get(), static_cast<lv_state_t>(state));
             return this->underlying();
         }
 
-        auto &clearState(ObjectState state) {
+        auto &clear_state(ObjectState state) {
             lv_obj_clear_state(get(), static_cast<lv_state_t>(state));
             return this->underlying();
         }
 
 #if LV_USE_ANIMATION
 
-        auto &finish_transition(uint8_t part) const {
+        auto &finish_transition(uint8_t part) {
             lv_obj_finish_transitions(get(), part);
             return this->underlying();
         }
@@ -629,7 +629,6 @@ namespace lvglcpp {
         }
 
         [[nodiscard]] bool debug_check_obj_valid() const {
-
             return lv_debug_check_obj_valid(get());
         }
 

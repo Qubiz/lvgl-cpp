@@ -120,8 +120,8 @@ namespace lvglcpp {
             return this->underlying();
         }
 
-        Textarea &sscrollbar_mode(ScrollbarMode mode) {
-            lv_textarea_set_sscrollbar_mode(get(), static_cast<lv_scrollbar_mode_t>(mode));
+        Textarea &scrollbar_mode(ScrollbarMode mode) {
+            lv_textarea_set_scrollbar_mode(get(), static_cast<lv_scrollbar_mode_t>(mode));
             return this->underlying();
         }
 
