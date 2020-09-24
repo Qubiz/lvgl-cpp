@@ -53,8 +53,8 @@ namespace lvglcpp {
             return *lv_chart_add_series(get(), color);
         }
 
-        Chart &clear_serie(lv_chart_series_t &serie) {
-            lv_chart_clear_serie(get(), &serie);
+        Chart &clear_series(lv_chart_series_t &serie) {
+            lv_chart_clear_series(get(), &serie);
             return this->underlying();
         }
 
@@ -173,7 +173,7 @@ namespace lvglcpp {
             return lv_chart_get_point_count(get());
         }
 
-        [[nodiscard]] uint16_t x_start_point(lv_chart_series_t &ser) const {
+        [[nodiscard]] static uint16_t x_start_point(lv_chart_series_t &ser) {
             return lv_chart_get_x_start_point(&ser);
         }
 

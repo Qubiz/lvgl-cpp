@@ -161,8 +161,18 @@ namespace lvglcpp {
             return this->underlying();
         }
 
-        auto &align_origo(ObjectAlign align, lv_obj_t *base = nullptr, lv_coord_t x_shift = 0, lv_coord_t y_shift = 0) {
-            lv_obj_align_origo(get(), base, static_cast<lv_align_t>(align), x_shift, y_shift);
+        auto &align_mid(ObjectAlign align, lv_obj_t *base = nullptr, lv_coord_t x_shift = 0, lv_coord_t y_shift = 0) {
+            lv_obj_align_mid(get(), base, static_cast<lv_align_t>(align), x_shift, y_shift);
+            return this->underlying();
+        }
+
+        auto &align_mid_x(ObjectAlign align, lv_obj_t *base = nullptr, lv_coord_t x_shift = 0) {
+            lv_obj_align_mid_x(get(), base, static_cast<lv_align_t>(align), x_shift);
+            return this->underlying();
+        }
+
+        auto &align_mid_y(ObjectAlign align, lv_obj_t *base = nullptr, lv_coord_t y_shift = 0) {
+            lv_obj_align_mid_y(get(), base, static_cast<lv_align_t>(align), y_shift);
             return this->underlying();
         }
 
