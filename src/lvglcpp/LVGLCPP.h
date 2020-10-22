@@ -34,6 +34,7 @@
 #include "widgets/ObjectMask.h"
 #include "widgets/Page.h"
 #include "widgets/Roller.h"
+#include "widgets/Screen.hpp"
 #include "widgets/Slider.h"
 #include "widgets/Spinbox.h"
 #include "widgets/Spinner.h" //
