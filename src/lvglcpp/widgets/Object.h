@@ -65,11 +65,11 @@ namespace lvglcpp {
     template<typename Derived = void>
     class Object : public detail::crtp<Derived, Object> {
     protected:
-        explicit Object(lv_obj_t *other) noexcept: obj_(other) {};
-
         friend class Page;
 
     public:
+        explicit Object(lv_obj_t *other) noexcept: obj_(other) {};
+
         Object() noexcept: obj_(lv_obj_create(lv_scr_act(), nullptr)) {};
 
         template<typename T>

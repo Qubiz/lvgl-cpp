@@ -23,14 +23,14 @@ int main() {
             .style<prop::BG_OPA>(LV_OPA_COVER)
             .style<prop::BG_COLOR, ObjectState::FOCUSED>(COLOR_MAIN);
 
-    Object<> background{};
-    background
+    Screen screen;
+    screen
             .add_style(style)
             .size(LV_HOR_RES_MAX, LV_VER_RES_MAX)
             .pos(0, 0)
             .state(ObjectState::FOCUSED);
 
-    List list(background);
+    List list(screen);
 
     std::array<Button, 7> list_buttons{
             Button(list.add_btn(nullptr, "Button 0")),
@@ -63,6 +63,20 @@ int main() {
     }, 1000, LV_TASK_PRIO_HIGHEST, &list);
 
     list.focus_btn(list_buttons[0]);
+
+    screen.load();
+
+    Screen screen2;
+
+    Object<> background(screen2);
+    background
+            .add_style(style)
+            .size(LV_HOR_RES_MAX, LV_VER_RES_MAX)
+            .pos(0, 0)
+            .state(ObjectState::FOCUSED)
+            .style<prop::BG_COLOR>(COLOR_MAIN);
+
+    screen2.load();
 
     display.start(); // Blocking call
 
