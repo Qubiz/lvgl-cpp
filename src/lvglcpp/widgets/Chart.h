@@ -10,7 +10,6 @@ namespace lvglcpp {
         NONE = LV_CHART_TYPE_NONE, /**< Don't draw the series*/
         LINE = LV_CHART_TYPE_LINE, /**< Connect the points with lines*/
         COLUMN = LV_CHART_TYPE_COLUMN, /**< Draw columns*/
-        SCATTER = LV_CHART_TYPE_SCATTER, /**< X/Y chart, points and/or lines*/
     };
 
     enum class ChartUpdateMode : lv_chart_update_mode_t {
