@@ -6,12 +6,18 @@
 
 using namespace lvglcpp;
 
+static void blank(DisplayDriverBase &driver) {
+    driver.blanking(true);
+}
+
 int main() {
 
     lv_init();
 
     static SDLDisplayDriver<LV_HOR_RES_MAX, LV_VER_RES_MAX> display("Test display");
     display.initialize();
+
+    blank(display);
 
     constexpr auto COLOR_MAIN = LV_COLOR_MAKE(0x47, 0x25, 0x6f);
 

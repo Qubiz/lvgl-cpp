@@ -168,6 +168,11 @@ namespace lvglcpp {
             return nullptr;
         }
 
+    public:
+        void blanking(bool enabled) override {
+            // Do nothing
+        }
+
     private:
         std::unique_ptr<SDL_Window, SDLWindowDeleter> window_;
         std::unique_ptr<SDL_Renderer, SDLRendererDeleter> renderer_;
