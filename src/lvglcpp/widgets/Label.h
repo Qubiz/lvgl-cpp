@@ -64,8 +64,8 @@ namespace lvglcpp {
         }
 
         template<typename ... Args>
-        Label &text_fmt(const char *text, const Args &... args) {
-            lv_label_set_text_fmt(raw(), text, args...);
+        Label &text_fmt(const char *text, Args &&... args) {
+            lv_label_set_text_fmt(raw(), text, std::forward<Args>(args)...);
             return this->underlying();
         }
 
