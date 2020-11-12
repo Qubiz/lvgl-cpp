@@ -33,33 +33,33 @@ namespace lvglcpp {
 
         template<typename T>
         explicit Spinner(const Object <T> &parent) noexcept
-                : Object(lv_spinner_create(parent.get(), nullptr)) {}
+                : Object(lv_spinner_create(parent.raw(), nullptr)) {}
 
         template<typename T>
         explicit Spinner(const Object <T> &parent, const Spinner &copy) noexcept
-                : Object(lv_spinner_create(parent.get(), copy.get())) {}
+                : Object(lv_spinner_create(parent.raw(), copy.raw())) {}
 
         /*
          * SETTERS
          */
 
         Spinner &arc_length(lv_anim_value_t deg) {
-            lv_spinner_set_arc_length(get(), deg);
+            lv_spinner_set_arc_length(raw(), deg);
             return this->underlying();
         }
 
         Spinner &spin_time(uint16_t time) {
-            lv_spinner_set_spin_time(get(), time);
+            lv_spinner_set_spin_time(raw(), time);
             return this->underlying();
         }
 
         Spinner &type(SpinnerType type) {
-            lv_spinner_set_type(get(), static_cast<lv_spinner_type_t>(type));
+            lv_spinner_set_type(raw(), static_cast<lv_spinner_type_t>(type));
             return this->underlying();
         }
 
         Spinner &dir(SpinnerDirection dir) {
-            lv_spinner_set_dir(get(), static_cast<lv_spinner_dir_t>(dir));
+            lv_spinner_set_dir(raw(), static_cast<lv_spinner_dir_t>(dir));
             return this->underlying();
         }
 
@@ -68,19 +68,19 @@ namespace lvglcpp {
          */
 
         [[nodiscard]] lv_anim_value_t arc_length() const {
-            return lv_spinner_get_arc_length(get());
+            return lv_spinner_get_arc_length(raw());
         }
 
         [[nodiscard]] uint16_t spin_time() const {
-            return lv_spinner_get_spin_time(get());
+            return lv_spinner_get_spin_time(raw());
         }
 
         [[nodiscard]] SpinnerType spinner_type() const {
-            return static_cast<SpinnerType>(lv_spinner_get_type(get()));
+            return static_cast<SpinnerType>(lv_spinner_get_type(raw()));
         }
 
         [[nodiscard]] SpinnerDirection dir(lv_obj_t *spinner) const {
-            return static_cast<SpinnerDirection>(lv_spinner_get_dir(get()));
+            return static_cast<SpinnerDirection>(lv_spinner_get_dir(raw()));
         }
 
     };

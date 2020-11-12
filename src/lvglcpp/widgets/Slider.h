@@ -28,38 +28,38 @@ namespace lvglcpp {
 
         template<typename T>
         explicit Slider(const Object<T> &parent) noexcept
-                : Object(lv_slider_create(parent.get(), nullptr)) {}
+                : Object(lv_slider_create(parent.raw(), nullptr)) {}
 
         template<typename T>
         explicit Slider(const Object<T> &parent, const Slider &copy) noexcept
-                : Object(lv_slider_create(parent.get(), copy.get())) {}
+                : Object(lv_slider_create(parent.raw(), copy.raw())) {}
 
         /*
          * SETTERS
          */
 
         Slider &value(int16_t value, lv_anim_enable_t anim) {
-            lv_slider_set_value(get(), value, anim);
+            lv_slider_set_value(raw(), value, anim);
             return this->underlying();
         }
 
         Slider &left_value(int16_t left_value, lv_anim_enable_t anim) {
-            lv_slider_set_left_value(get(), left_value, anim);
+            lv_slider_set_left_value(raw(), left_value, anim);
             return this->underlying();
         }
 
         Slider &range(int16_t min, int16_t max) {
-            lv_slider_set_range(get(), min, max);
+            lv_slider_set_range(raw(), min, max);
             return this->underlying();
         }
 
         Slider &type(SliderType type) {
-            lv_slider_set_type(get(), static_cast<lv_slider_type_t>(type));
+            lv_slider_set_type(raw(), static_cast<lv_slider_type_t>(type));
             return this->underlying();
         }
 
         Slider &anim_time(uint16_t anim_time) {
-            lv_slider_set_anim_time(get(), anim_time);
+            lv_slider_set_anim_time(raw(), anim_time);
             return this->underlying();
         }
 
@@ -68,31 +68,31 @@ namespace lvglcpp {
          */
 
         [[nodiscard]] int16_t value() const {
-            return lv_slider_get_value(get());
+            return lv_slider_get_value(raw());
         }
 
         [[nodiscard]] int16_t left_value() const {
-            return lv_slider_get_left_value(get());
+            return lv_slider_get_left_value(raw());
         }
 
         [[nodiscard]] int16_t min_value() const {
-            return lv_slider_get_min_value(get());
+            return lv_slider_get_min_value(raw());
         }
 
         [[nodiscard]] int16_t max_value() const {
-            return lv_slider_get_max_value(get());
+            return lv_slider_get_max_value(raw());
         }
 
         [[nodiscard]] SliderType slider_type() const {
-            return static_cast<SliderType>(lv_slider_get_type(get()));
+            return static_cast<SliderType>(lv_slider_get_type(raw()));
         }
 
         [[nodiscard]] uint16_t anim_time() const {
-            return lv_slider_get_anim_time(get());
+            return lv_slider_get_anim_time(raw());
         }
 
         [[nodiscard]] bool is_dragged() const {
-            return lv_slider_is_dragged(get());
+            return lv_slider_is_dragged(raw());
         }
 
     };

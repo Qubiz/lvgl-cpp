@@ -32,63 +32,63 @@ namespace lvglcpp {
 
         template<typename T>
         explicit Dropdown(const Object <T> &parent) noexcept
-                : Object(lv_dropdown_create(parent.get(), nullptr)) {}
+                : Object(lv_dropdown_create(parent.raw(), nullptr)) {}
 
         template<typename T>
         explicit Dropdown(const Object <T> &parent, const Dropdown &copy) noexcept
-                : Object(lv_dropdown_create(parent.get(), copy.get())) {}
+                : Object(lv_dropdown_create(parent.raw(), copy.raw())) {}
 
         /*
          * SETTERS
          */
 
         Dropdown &text(const char *txt) {
-            lv_dropdown_set_text(get(), txt);
+            lv_dropdown_set_text(raw(), txt);
             return this->underlying();
         }
 
         Dropdown &r_options() {
-            lv_dropdown_clear_options(get());
+            lv_dropdown_clear_options(raw());
             return this->underlying();
         }
 
         Dropdown &options(const char *options) {
-            lv_dropdown_set_options(get(), options);
+            lv_dropdown_set_options(raw(), options);
             return this->underlying();
         }
 
         Dropdown &options_static(const char *options) {
-            lv_dropdown_set_options_static(get(), options);
+            lv_dropdown_set_options_static(raw(), options);
             return this->underlying();
         }
 
         Dropdown &option(const char *option, uint32_t pos) {
-            lv_dropdown_add_option(get(), option, pos);
+            lv_dropdown_add_option(raw(), option, pos);
             return this->underlying();
         }
 
         Dropdown &selected(uint16_t sel_opt) {
-            lv_dropdown_set_selected(get(), sel_opt);
+            lv_dropdown_set_selected(raw(), sel_opt);
             return this->underlying();
         }
 
         Dropdown &dir(DropdownDirection dir) {
-            lv_dropdown_set_dir(get(), static_cast<lv_dropdown_dir_t>(dir));
+            lv_dropdown_set_dir(raw(), static_cast<lv_dropdown_dir_t>(dir));
             return this->underlying();
         }
 
         Dropdown &max_height(lv_coord_t h) {
-            lv_dropdown_set_max_height(get(), h);
+            lv_dropdown_set_max_height(raw(), h);
             return this->underlying();
         }
 
         Dropdown &symbol(const char *symbol) {
-            lv_dropdown_set_symbol(get(), symbol);
+            lv_dropdown_set_symbol(raw(), symbol);
             return this->underlying();
         }
 
         Dropdown &show_selected(bool show) {
-            lv_dropdown_set_show_selected(get(), show);
+            lv_dropdown_set_show_selected(raw(), show);
             return this->underlying();
         }
 
@@ -97,51 +97,51 @@ namespace lvglcpp {
          */
 
         [[nodiscard]] const char *text() const {
-            return lv_dropdown_get_text(get());
+            return lv_dropdown_get_text(raw());
         }
 
         [[nodiscard]] const char *options() const {
-            return lv_dropdown_get_options(get());
+            return lv_dropdown_get_options(raw());
         }
 
         [[nodiscard]] uint16_t selected() const {
-            return lv_dropdown_get_selected(get());
+            return lv_dropdown_get_selected(raw());
         }
 
         [[nodiscard]] uint16_t option_cnt() const {
-            return lv_dropdown_get_option_cnt(get());
+            return lv_dropdown_get_option_cnt(raw());
         }
 
         void selected_str(std::span<char *> s) {
-            return lv_dropdown_get_selected_str(get(), reinterpret_cast<char *>(s.data()), s.size());
+            return lv_dropdown_get_selected_str(raw(), reinterpret_cast<char *>(s.data()), s.size());
         }
 
         [[nodiscard]] lv_coord_t max_height() const {
-            return lv_dropdown_get_max_height(get());
+            return lv_dropdown_get_max_height(raw());
         }
 
         [[nodiscard]] const char *symbol() const {
-            return lv_dropdown_get_symbol(get());
+            return lv_dropdown_get_symbol(raw());
         }
 
         [[nodiscard]] DropdownDirection dir() const {
-            return static_cast<DropdownDirection>(lv_dropdown_get_dir(get()));
+            return static_cast<DropdownDirection>(lv_dropdown_get_dir(raw()));
         }
 
         [[nodiscard]] bool show_selected() const {
-            return lv_dropdown_get_show_selected(get());
+            return lv_dropdown_get_show_selected(raw());
         }
 
         /*
          * OTHER
          */
         Dropdown &open() {
-            lv_dropdown_open(get());
+            lv_dropdown_open(raw());
             return this->underlying();
         }
 
         Dropdown &close() {
-            lv_dropdown_close(get());
+            lv_dropdown_close(raw());
             return this->underlying();
         }
 

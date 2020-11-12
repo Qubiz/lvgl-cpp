@@ -25,14 +25,14 @@ namespace lvglcpp {
 
         template<typename T>
         explicit MessageBox(const Object<T> &parent) noexcept
-                : Object(lv_msgbox_create(parent.get(), nullptr)) {}
+                : Object(lv_msgbox_create(parent.raw(), nullptr)) {}
 
         template<typename T>
         explicit MessageBox(const Object<T> &parent, const MessageBox &copy) noexcept
-                : Object(lv_msgbox_create(parent.get(), copy.get())) {}
+                : Object(lv_msgbox_create(parent.raw(), copy.raw())) {}
 
         MessageBox &add_btns(std::span<const char *> actions_map) {
-            lv_msgbox_add_btns(get(), const_cast<const char **>(actions_map.data()));
+            lv_msgbox_add_btns(raw(), const_cast<const char **>(actions_map.data()));
             return this->underlying();
         }
 
@@ -40,27 +40,27 @@ namespace lvglcpp {
          * SETTERS
          */
         MessageBox &text(const char *txt) {
-            lv_msgbox_set_text(get(), txt);
+            lv_msgbox_set_text(raw(), txt);
             return this->underlying();
         }
 
         MessageBox &anim_time(uint16_t anim_time) {
-            lv_msgbox_set_anim_time(get(), anim_time);
+            lv_msgbox_set_anim_time(raw(), anim_time);
             return this->underlying();
         }
 
         MessageBox &start_auto_close(uint16_t delay) {
-            lv_msgbox_start_auto_close(get(), delay);
+            lv_msgbox_start_auto_close(raw(), delay);
             return this->underlying();
         }
 
         MessageBox &stop_auto_close() {
-            lv_msgbox_stop_auto_close(get());
+            lv_msgbox_stop_auto_close(raw());
             return this->underlying();
         }
 
         MessageBox &recolor(bool en) {
-            lv_msgbox_set_recolor(get(), en);
+            lv_msgbox_set_recolor(raw(), en);
             return this->underlying();
         }
 
@@ -69,27 +69,27 @@ namespace lvglcpp {
          */
 
         [[nodiscard]] const char *text() const {
-            return lv_msgbox_get_text(get());
+            return lv_msgbox_get_text(raw());
         }
 
         [[nodiscard]] uint16_t active_btn() const {
-            return lv_msgbox_get_active_btn(get());
+            return lv_msgbox_get_active_btn(raw());
         }
 
         [[nodiscard]] const char *active_btn_text() const {
-            return lv_msgbox_get_active_btn_text(get());
+            return lv_msgbox_get_active_btn_text(raw());
         }
 
         [[nodiscard]] uint16_t anim_time() const {
-            return lv_msgbox_get_anim_time(get());
+            return lv_msgbox_get_anim_time(raw());
         }
 
         [[nodiscard]] bool recolor() const {
-            return lv_msgbox_get_recolor(get());
+            return lv_msgbox_get_recolor(raw());
         }
 
         [[nodiscard]] lv_obj_t *btnmatrix() const {
-            return lv_msgbox_get_btnmatrix(get());
+            return lv_msgbox_get_btnmatrix(raw());
         }
 
     };

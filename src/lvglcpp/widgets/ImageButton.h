@@ -22,33 +22,33 @@ namespace lvglcpp {
 
         template<typename T>
         explicit ImageButton(const Object<T> &parent) noexcept
-                : Object(lv_imgbtn_create(parent.get(), nullptr)) {}
+                : Object(lv_imgbtn_create(parent.raw(), nullptr)) {}
 
         template<typename T>
         explicit ImageButton(const Object<T> &parent, const ImageButton &copy) noexcept
-                : Object(lv_imgbtn_create(parent.get(), copy.get())) {}
+                : Object(lv_imgbtn_create(parent.raw(), copy.raw())) {}
 
         /*
          * SETTERS
          */
 
         ImageButton &src(lv_obj_t *imgbtn, lv_btn_state_t state, const void *src) {
-            lv_imgbtn_set_src(get(), state, src);
+            lv_imgbtn_set_src(raw(), state, src);
             return this->underlying();
         }
 
         ImageButton &checkable(lv_obj_t *imgbtn, bool tgl) {
-            lv_imgbtn_set_checkable(get(), tgl);
+            lv_imgbtn_set_checkable(raw(), tgl);
             return this->underlying();
         }
 
         ImageButton &state(lv_obj_t *imgbtn, lv_btn_state_t state) {
-            lv_imgbtn_set_state(get(), state);
+            lv_imgbtn_set_state(raw(), state);
             return this->underlying();
         }
 
         ImageButton &toggle(lv_obj_t *imgbtn) {
-            lv_imgbtn_toggle(get());
+            lv_imgbtn_toggle(raw());
             return this->underlying();
         }
 
@@ -65,15 +65,15 @@ namespace lvglcpp {
          */
 
         [[nodiscard]] const void *src(ButtonState state) const {
-            return lv_imgbtn_get_src(get(), static_cast<lv_btn_state_t>(state));
+            return lv_imgbtn_get_src(raw(), static_cast<lv_btn_state_t>(state));
         }
 
         [[nodiscard]] ButtonState state() const {
-            return static_cast<ButtonState>(lv_imgbtn_get_state(get()));
+            return static_cast<ButtonState>(lv_imgbtn_get_state(raw()));
         }
 
         [[nodiscard]] bool checkable() const {
-            return lv_imgbtn_get_checkable(get());
+            return lv_imgbtn_get_checkable(raw());
         }
 
     };
