@@ -22,28 +22,28 @@ namespace lvglcpp {
 
         template<typename T>
         explicit Line(const Object <T> &parent) noexcept
-                : Object(lv_line_create(parent.get(), nullptr)) {}
+                : Object(lv_line_create(parent.raw(), nullptr)) {}
 
         template<typename T>
         explicit Line(const Object <T> &parent, const Line &copy) noexcept
-                : Object(lv_line_create(parent.get(), copy.get())) {}
+                : Object(lv_line_create(parent.raw(), copy.raw())) {}
 
         /*
          * SETTERS
          */
 
         Line &points(std::span<lv_point_t> points) {
-            lv_line_set_points(get(), points.data(), points.size());
+            lv_line_set_points(raw(), points.data(), points.size());
             return this->underlying();
         }
 
         Line &auto_size(bool enabled) {
-            lv_line_set_auto_size(get(), enabled);
+            lv_line_set_auto_size(raw(), enabled);
             return this->underlying();
         }
 
         Line &y_invert(bool enabled) {
-            lv_line_set_y_invert(get(), enabled);
+            lv_line_set_y_invert(raw(), enabled);
             return this->underlying();
         }
 
@@ -52,11 +52,11 @@ namespace lvglcpp {
          */
 
         [[nodiscard]] bool auto_size() const {
-            return lv_line_get_auto_size(get());
+            return lv_line_get_auto_size(raw());
         }
 
         [[nodiscard]] bool y_invert() const {
-            return lv_line_get_y_invert(get());
+            return lv_line_get_y_invert(raw());
         }
 
     };

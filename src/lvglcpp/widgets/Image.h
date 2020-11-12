@@ -20,11 +20,11 @@ namespace lvglcpp {
 
         template<typename T>
         explicit Image(const Object <T> &parent) noexcept
-                : Object(lv_img_create(parent.get(), nullptr)) {}
+                : Object(lv_img_create(parent.raw(), nullptr)) {}
 
         template<typename T>
         explicit Image(const Object <T> &parent, const Image &copy) noexcept
-                : Object(lv_img_create(parent.get(), copy.get())) {}
+                : Object(lv_img_create(parent.raw(), copy.raw())) {}
 
         // Image specific constructors
         explicit Image(const lv_img_dsc_t &source) noexcept
@@ -49,42 +49,42 @@ namespace lvglcpp {
          */
         template<typename SourceType>
         Image &set_src(const SourceType &image) {
-            lv_img_set_src(get(), &image);
+            lv_img_set_src(raw(), &image);
             return this->underlying();
         }
 
         Image &set_auto_size(bool autosize) {
-            lv_img_set_auto_size(get(), autosize);
+            lv_img_set_auto_size(raw(), autosize);
             return this->underlying();
         }
 
         Image &set_offset_x(lv_coord_t x) {
-            lv_img_set_offset_x(get(), x);
+            lv_img_set_offset_x(raw(), x);
             return this->underlying();
         }
 
         Image &set_offset_y(lv_coord_t y) {
-            lv_img_set_offset_y(get(), y);
+            lv_img_set_offset_y(raw(), y);
             return this->underlying();
         }
 
         Image &set_pivot(lv_coord_t pivot_x, lv_coord_t pivot_y) {
-            lv_img_set_pivot(get(), pivot_x, pivot_y);
+            lv_img_set_pivot(raw(), pivot_x, pivot_y);
             return this->underlying();
         }
 
         Image &set_angle(int16_t angle) {
-            lv_img_set_angle(get(), angle);
+            lv_img_set_angle(raw(), angle);
             return this->underlying();
         }
 
         Image &set_zoom(uint16_t zoom) {
-            lv_img_set_zoom(get(), zoom);
+            lv_img_set_zoom(raw(), zoom);
             return this->underlying();
         }
 
         Image &set_antialias(bool antialias) {
-            lv_img_set_antialias(get(), antialias);
+            lv_img_set_antialias(raw(), antialias);
             return this->underlying();
         }
 
@@ -94,23 +94,23 @@ namespace lvglcpp {
 
         template<typename SourceType>
         [[nodiscard]] const SourceType *src() const {
-            return reinterpret_cast<SourceType *>(lv_img_get_src(get()));
+            return reinterpret_cast<SourceType *>(lv_img_get_src(raw()));
         }
 
         [[nodiscard]] const char *file_name() const {
-            return lv_img_get_file_name(get());
+            return lv_img_get_file_name(raw());
         }
 
         [[nodiscard]] bool auto_size() const {
-            return lv_img_get_auto_size(get());
+            return lv_img_get_auto_size(raw());
         }
 
         [[nodiscard]] lv_coord_t offset_x() const {
-            return lv_img_get_offset_x(get());
+            return lv_img_get_offset_x(raw());
         }
 
         [[nodiscard]] lv_coord_t offset_y() const {
-            return lv_img_get_offset_y(get());
+            return lv_img_get_offset_y(raw());
         }
 
         [[nodiscard]] std::pair<lv_coord_t, lv_coord_t> offset() const {
@@ -118,25 +118,25 @@ namespace lvglcpp {
         }
 
         [[nodiscard]] uint16_t angle() const {
-            return lv_img_get_angle(get());
+            return lv_img_get_angle(raw());
         }
 
         [[nodiscard]] lv_point_t pivot() const {
             lv_point_t point;
-            lv_img_get_pivot(get(), &point);
+            lv_img_get_pivot(raw(), &point);
             return point;
         }
 
         void pivot(lv_point_t &point) const {
-            return lv_img_get_pivot(get(), &point);
+            return lv_img_get_pivot(raw(), &point);
         }
 
         [[nodiscard]] uint16_t zoom() const {
-            return lv_img_get_zoom(get());
+            return lv_img_get_zoom(raw());
         }
 
         [[nodiscard]] bool antialias() const {
-            return lv_img_get_antialias(get());
+            return lv_img_get_antialias(raw());
         }
 
     };

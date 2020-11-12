@@ -32,17 +32,17 @@ namespace lvglcpp {
 
         template<typename T>
         explicit ButtonMatrix(const Object<T> &parent) noexcept
-                : Object(lv_btnmatrix_create(parent.get(), nullptr)) {}
+                : Object(lv_btnmatrix_create(parent.raw(), nullptr)) {}
 
         template<typename T>
         explicit ButtonMatrix(const Object<T> &parent, const ButtonMatrix &copy) noexcept
-                : Object(lv_btnmatrix_create(parent.get(), copy.get())) {}
+                : Object(lv_btnmatrix_create(parent.raw(), copy.raw())) {}
 
         /*
          * SETTERS
          */
         ButtonMatrix &map(std::span<const char *> map) {
-            lv_btnmatrix_set_map(get(), map.data());
+            lv_btnmatrix_set_map(raw(), map.data());
             return this->underlying();
         }
 
@@ -52,54 +52,54 @@ namespace lvglcpp {
 //        }
 
         ButtonMatrix &ctrl_map(std::span<lv_btnmatrix_ctrl_t> map) {
-            lv_btnmatrix_set_ctrl_map(get(), map.data());
+            lv_btnmatrix_set_ctrl_map(raw(), map.data());
             return this->underlying();
         }
 
         ButtonMatrix &focused_btn(uint16_t id) {
-            lv_btnmatrix_set_focused_btn(get(), id);
+            lv_btnmatrix_set_focused_btn(raw(), id);
             return this->underlying();
         }
 
         ButtonMatrix &recolor(bool enabled) {
-            lv_btnmatrix_set_recolor(get(), enabled);
+            lv_btnmatrix_set_recolor(raw(), enabled);
             return this->underlying();
         }
 
         ButtonMatrix &set_btn_ctrl(uint16_t btn_id, lv_btnmatrix_ctrl_t ctrl) {
-            lv_btnmatrix_set_btn_ctrl(get(), btn_id, ctrl);
+            lv_btnmatrix_set_btn_ctrl(raw(), btn_id, ctrl);
             return this->underlying();
         }
 
         ButtonMatrix &clear_btn_ctrl(uint16_t btn_id, lv_btnmatrix_ctrl_t ctrl) {
-            lv_btnmatrix_clear_btn_ctrl(get(), btn_id, ctrl);
+            lv_btnmatrix_clear_btn_ctrl(raw(), btn_id, ctrl);
             return this->underlying();
         }
 
         ButtonMatrix &set_btn_ctr_all(lv_btnmatrix_ctrl_t ctrl) {
-            lv_btnmatrix_set_btn_ctrl_all(get(), ctrl);
+            lv_btnmatrix_set_btn_ctrl_all(raw(), ctrl);
             return this->underlying();
         }
 
         ButtonMatrix &clear_btn_ctr_all(lv_btnmatrix_ctrl_t ctrl) {
-            lv_btnmatrix_clear_btn_ctrl_all(get(), ctrl);
+            lv_btnmatrix_clear_btn_ctrl_all(raw(), ctrl);
             return this->underlying();
         }
 
         ButtonMatrix &btn_width(uint16_t btn_id, uint8_t width) {
-            lv_btnmatrix_set_btn_width(get(), btn_id, width);
+            lv_btnmatrix_set_btn_width(raw(), btn_id, width);
             return this->underlying();
         }
 
         ButtonMatrix &one_check(bool one_check) {
-            lv_btnmatrix_set_one_check(get(), one_check);
+            lv_btnmatrix_set_one_check(raw(), one_check);
             return this->underlying();
         }
 
         using Object::align;
 
         ButtonMatrix &align(LabelAlign align) {
-            lv_btnmatrix_set_align(get(), static_cast<lv_label_align_t>(align));
+            lv_btnmatrix_set_align(raw(), static_cast<lv_label_align_t>(align));
             return this->underlying();
         }
 
@@ -107,39 +107,39 @@ namespace lvglcpp {
          * GETTERS
          */
         [[nodiscard]] const char **map_array() const {
-            return lv_btnmatrix_get_map_array(get());
+            return lv_btnmatrix_get_map_array(raw());
         }
 
         [[nodiscard]] bool recolor() const {
-            return lv_btnmatrix_get_recolor(get());
+            return lv_btnmatrix_get_recolor(raw());
         }
 
         [[nodiscard]] uint16_t active_btn() const {
-            return lv_btnmatrix_get_active_btn(get());
+            return lv_btnmatrix_get_active_btn(raw());
         }
 
         [[nodiscard]] const char *active_btn_text() const {
-            return lv_btnmatrix_get_active_btn_text(get());
+            return lv_btnmatrix_get_active_btn_text(raw());
         }
 
         [[nodiscard]] uint16_t focused_btn() const {
-            return lv_btnmatrix_get_focused_btn(get());
+            return lv_btnmatrix_get_focused_btn(raw());
         }
 
         [[nodiscard]] const char *btn_text(uint16_t id) const {
-            return lv_btnmatrix_get_active_btn_text(get());
+            return lv_btnmatrix_get_active_btn_text(raw());
         }
 
         [[nodiscard]] bool btn_ctrl(uint16_t id, lv_btnmatrix_ctrl_t ctrl) const {
-            return lv_btnmatrix_get_btn_ctrl(get(), id, ctrl);
+            return lv_btnmatrix_get_btn_ctrl(raw(), id, ctrl);
         }
 
         [[nodiscard]] bool one_check() const {
-            return lv_btnmatrix_get_one_check(get());
+            return lv_btnmatrix_get_one_check(raw());
         }
 
         [[nodiscard]] LabelAlign align() const {
-            return static_cast<LabelAlign>(lv_btnmatrix_get_align(get()));
+            return static_cast<LabelAlign>(lv_btnmatrix_get_align(raw()));
         }
     };
 }

@@ -20,33 +20,33 @@ namespace lvglcpp {
 
         template<typename T>
         explicit Led(const Object <T> &parent) noexcept
-                : Object(lv_led_create(parent.get(), nullptr)) {}
+                : Object(lv_led_create(parent.raw(), nullptr)) {}
 
         template<typename T>
         explicit Led(const Object <T> &parent, const Led &copy) noexcept
-                : Object(lv_led_create(parent.get(), copy.get())) {}
+                : Object(lv_led_create(parent.raw(), copy.raw())) {}
 
         /*
          * SETTERS
          */
 
         Led &bright(uint8_t brightness) {
-            lv_led_set_bright(get(), brightness);
+            lv_led_set_bright(raw(), brightness);
             return this->underlying();
         }
 
         Led &on() {
-            lv_led_on(get());
+            lv_led_on(raw());
             return this->underlying();
         }
 
         Led &off() {
-            lv_led_off(get());
+            lv_led_off(raw());
             return this->underlying();
         }
 
         Led &toggle() {
-            lv_led_toggle(get());
+            lv_led_toggle(raw());
             return this->underlying();
         }
 
@@ -55,7 +55,7 @@ namespace lvglcpp {
          */
 
         [[nodiscard]] uint8_t bright() const {
-            return lv_led_get_bright(get());
+            return lv_led_get_bright(raw());
         }
 
     };

@@ -24,43 +24,43 @@ namespace lvglcpp {
 
         template<typename T>
         explicit Spinbox(const Object <T> &parent) noexcept
-                : Object(lv_spinbox_create(parent.get(), nullptr)) {}
+                : Object(lv_spinbox_create(parent.raw(), nullptr)) {}
 
         template<typename T>
         explicit Spinbox(const Object <T> &parent, const Spinbox &copy) noexcept
-                : Object(lv_spinbox_create(parent.get(), copy.get())) {}
+                : Object(lv_spinbox_create(parent.raw(), copy.raw())) {}
 
         /*
          * SETTERS
          */
 
         Spinbox &rollover(bool b) {
-            lv_spinbox_set_rollover(get(), b);
+            lv_spinbox_set_rollover(raw(), b);
             return this->underlying();
         }
 
         Spinbox &value(int32_t i) {
-            lv_spinbox_set_value(get(), i);
+            lv_spinbox_set_value(raw(), i);
             return this->underlying();
         }
 
         Spinbox &digit_format(uint8_t digit_count, uint8_t separator_position) {
-            lv_spinbox_set_digit_format(get(), digit_count, separator_position);
+            lv_spinbox_set_digit_format(raw(), digit_count, separator_position);
             return this->underlying();
         }
 
         Spinbox &step(uint32_t step) {
-            lv_spinbox_set_step(get(), step);
+            lv_spinbox_set_step(raw(), step);
             return this->underlying();
         }
 
         Spinbox &range(int32_t range_min, int32_t range_max) {
-            lv_spinbox_set_range(get(), range_min, range_max);
+            lv_spinbox_set_range(raw(), range_min, range_max);
             return this->underlying();
         }
 
         Spinbox &padding_left(uint8_t padding) {
-            lv_spinbox_set_padding_left(get(), padding);
+            lv_spinbox_set_padding_left(raw(), padding);
             return this->underlying();
         }
 
@@ -69,30 +69,30 @@ namespace lvglcpp {
          */
 
         [[nodiscard]] bool rollover() const {
-            return lv_spinbox_get_rollover(get());
+            return lv_spinbox_get_rollover(raw());
         }
 
         [[nodiscard]] int32_t value() const {
-            return lv_spinbox_get_value(get());
+            return lv_spinbox_get_value(raw());
         }
 
         /*
          * OTHER
          */
         void step_next() {
-            return lv_spinbox_step_next(get());
+            return lv_spinbox_step_next(raw());
         }
 
         void step_prev() {
-            return lv_spinbox_step_prev(get());
+            return lv_spinbox_step_prev(raw());
         }
 
         void increment() {
-            return lv_spinbox_increment(get());
+            return lv_spinbox_increment(raw());
         }
 
         void decrement() {
-            return lv_spinbox_decrement(get());
+            return lv_spinbox_decrement(raw());
         }
     };
 }

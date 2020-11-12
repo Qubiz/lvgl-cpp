@@ -22,33 +22,33 @@ namespace lvglcpp {
 
         template<typename T>
         explicit Switch(const Object <T> &parent) noexcept
-                : Object(lv_switch_create(parent.get(), nullptr)) {}
+                : Object(lv_switch_create(parent.raw(), nullptr)) {}
 
         template<typename T>
         explicit Switch(const Object <T> &parent, const Switch &copy) noexcept
-                : Object(lv_switch_create(parent.get(), copy.get())) {}
+                : Object(lv_switch_create(parent.raw(), copy.raw())) {}
 
         /*
          * SETTERS
          */
 
         Switch &on(lv_anim_enable_t anim) {
-            lv_switch_on(get(), anim);
+            lv_switch_on(raw(), anim);
             return this->underlying();
         }
 
         Switch &off(lv_anim_enable_t anim) {
-            lv_switch_off(get(), anim);
+            lv_switch_off(raw(), anim);
             return this->underlying();
         }
 
         Switch &toggle(lv_anim_enable_t anim) {
-            lv_switch_toggle(get(), anim);
+            lv_switch_toggle(raw(), anim);
             return this->underlying();
         }
 
         Switch &anim_time(uint16_t anim_time) {
-            lv_switch_set_anim_time(get(), anim_time);
+            lv_switch_set_anim_time(raw(), anim_time);
             return this->underlying();
         }
 
@@ -57,11 +57,11 @@ namespace lvglcpp {
          */
 
         [[nodiscard]] bool state() const {
-            return lv_switch_get_state(get());
+            return lv_switch_get_state(raw());
         }
 
         [[nodiscard]] uint16_t anim_time() const {
-            return lv_switch_get_anim_time(get());
+            return lv_switch_get_anim_time(raw());
         }
 
     };

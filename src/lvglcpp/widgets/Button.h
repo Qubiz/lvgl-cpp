@@ -36,49 +36,49 @@ namespace lvglcpp {
 
         template<typename T>
         explicit Button(const Object<T> &parent) noexcept
-                : Object(lv_btn_create(parent.get(), nullptr)) {}
+                : Object(lv_btn_create(parent.raw(), nullptr)) {}
 
         template<typename T>
         explicit Button(const Object<T> &parent, const Button &copy) noexcept
-                : Object(lv_btn_create(parent.get(), copy.get())) {}
+                : Object(lv_btn_create(parent.raw(), copy.raw())) {}
 
         /*
          * SETTERS
          */
 
         Button &checkable(bool toggle) {
-            lv_btn_set_checkable(get(), toggle);
+            lv_btn_set_checkable(raw(), toggle);
             return this->underlying();
         }
 
         Button &state(ButtonState state) {
-            lv_btn_set_state(get(), static_cast<lv_btn_state_t>(state));
+            lv_btn_set_state(raw(), static_cast<lv_btn_state_t>(state));
             return this->underlying();
         }
 
         Button &toggle() {
-            lv_btn_toggle(get());
+            lv_btn_toggle(raw());
             return this->underlying();
         }
 
         Button &layout(Layout layout) {
-            lv_btn_set_layout(get(), static_cast<lv_layout_t>(layout));
+            lv_btn_set_layout(raw(), static_cast<lv_layout_t>(layout));
             return this->underlying();
         }
 
         Button &fit4(Fit left, Fit right, Fit top, Fit bottom) {
-            lv_btn_set_fit4(get(), static_cast<lv_fit_t>(left), static_cast<lv_fit_t>(right),
+            lv_btn_set_fit4(raw(), static_cast<lv_fit_t>(left), static_cast<lv_fit_t>(right),
                             static_cast<lv_fit_t>(top), static_cast<lv_fit_t>(bottom));
             return this->underlying();
         }
 
         Button &fit2(Fit hor, Fit ver) {
-            lv_btn_set_fit2(get(), static_cast<lv_fit_t>(hor), static_cast<lv_fit_t>(ver));
+            lv_btn_set_fit2(raw(), static_cast<lv_fit_t>(hor), static_cast<lv_fit_t>(ver));
             return this->underlying();
         }
 
         Button &fit(Fit fit) {
-            lv_btn_set_fit(get(), static_cast<lv_fit_t>(fit));
+            lv_btn_set_fit(raw(), static_cast<lv_fit_t>(fit));
             return this->underlying();
         }
 
@@ -87,31 +87,31 @@ namespace lvglcpp {
          */
 
         [[nodiscard]] ButtonState state() const {
-            return static_cast<ButtonState>(lv_btn_get_state(get()));
+            return static_cast<ButtonState>(lv_btn_get_state(raw()));
         }
 
         [[nodiscard]] bool checkable() const {
-            return lv_btn_get_checkable(get());
+            return lv_btn_get_checkable(raw());
         }
 
         [[nodiscard]] lv_layout_t layout() const {
-            return lv_btn_get_layout(get());
+            return lv_btn_get_layout(raw());
         }
 
         [[nodiscard]] Fit fit_left() const {
-            return static_cast<Fit>(lv_btn_get_fit_left(get()));
+            return static_cast<Fit>(lv_btn_get_fit_left(raw()));
         }
 
         [[nodiscard]] Fit fit_right() const {
-            return static_cast<Fit>(lv_btn_get_fit_right(get()));
+            return static_cast<Fit>(lv_btn_get_fit_right(raw()));
         }
 
         [[nodiscard]] Fit fit_top() const {
-            return static_cast<Fit>(lv_btn_get_fit_top(get()));
+            return static_cast<Fit>(lv_btn_get_fit_top(raw()));
         }
 
         [[nodiscard]] Fit fit_bottom() const {
-            return static_cast<Fit>(lv_btn_get_fit_bottom(get()));
+            return static_cast<Fit>(lv_btn_get_fit_bottom(raw()));
         }
     };
 }
