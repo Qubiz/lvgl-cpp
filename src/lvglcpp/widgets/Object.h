@@ -530,8 +530,8 @@ namespace lvglcpp {
             return lv_obj_is_protected(raw(), protect);
         }
 
-        [[nodiscard]] lv_state_t get_state(ObjectPart part) const {
-            return lv_obj_get_state(raw(), part);
+        [[nodiscard]] ObjectState get_state(ObjectPart part) const {
+            return static_cast<ObjectState>(lv_obj_get_state(raw(), static_cast<lv_obj_part_t>(part)));
         }
 
         [[nodiscard]] lv_signal_cb_t get_signal_cb() const {
