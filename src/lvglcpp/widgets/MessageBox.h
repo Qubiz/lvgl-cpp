@@ -15,7 +15,7 @@ namespace lvglcpp {
         BTN = LV_MSGBOX_PART_BTN,
     };
 
-    class MessageBox final : public Object<MessageBox> {
+    class MessageBox : public Object<MessageBox> {
     protected:
         explicit MessageBox(lv_obj_t *other) noexcept: Object(other) {};
 

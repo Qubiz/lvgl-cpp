@@ -12,7 +12,7 @@ namespace lvglcpp {
         KNOB = LV_SWITCH_PART_KNOB, /**< Switch knob. */
     };
 
-    class Switch final : public Object<Switch> {
+    class Switch : public Object<Switch> {
     protected:
         explicit Switch(lv_obj_t *other) noexcept: Object(other) {};
 

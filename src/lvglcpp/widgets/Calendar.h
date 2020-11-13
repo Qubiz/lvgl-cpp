@@ -15,7 +15,7 @@ namespace lvglcpp {
         DATE = LV_CALENDAR_PART_DATE, /** Day name style */
     };
 
-    class Calendar final : public Object<Calendar> {
+    class Calendar : public Object<Calendar> {
     protected:
         explicit Calendar(lv_obj_t *other) noexcept: Object(other) {};
 

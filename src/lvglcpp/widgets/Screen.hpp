@@ -4,7 +4,7 @@
 
 namespace lvglcpp {
 
-    class Screen final : public Object<Screen> {
+    class Screen : public Object<Screen> {
     public:
         Screen() : Object(lv_obj_create(nullptr, nullptr)) {};
 

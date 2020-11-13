@@ -12,7 +12,7 @@ namespace lvglcpp {
         MAIN = LV_IMGBTN_PART_MAIN
     };
 
-    class ImageButton final : public Object<ImageButton> {
+    class ImageButton : public Object<ImageButton> {
     protected:
         explicit ImageButton(lv_obj_t *other) noexcept: Object(other) {};
 

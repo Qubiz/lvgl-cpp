@@ -17,7 +17,7 @@ namespace lvglcpp {
         INDIC = LV_BAR_PART_INDIC
     };
 
-    class Bar final : public Object<Bar> {
+    class Bar : public Object<Bar> {
     public:
         static constexpr auto ANIM_STATE_START = LV_BAR_ANIM_STATE_START;
         static constexpr auto ANIM_STATE_END = LV_BAR_ANIM_STATE_END;

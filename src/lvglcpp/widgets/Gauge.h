@@ -14,7 +14,7 @@ namespace lvglcpp {
         NEEDLE = LV_GAUGE_PART_NEEDLE,
     };
 
-    class Gauge final : public Object<Gauge> {
+    class Gauge : public Object<Gauge> {
     protected:
         explicit Gauge(lv_obj_t *other) noexcept: Object(other) {};
 

@@ -22,7 +22,7 @@ namespace lvglcpp {
         INDIC = LV_TABVIEW_PART_INDIC,
     };
 
-    class Tabview final : public Object<Tabview> {
+    class Tabview : public Object<Tabview> {
     protected:
         explicit Tabview(lv_obj_t *other) noexcept: Object(other) {};
 

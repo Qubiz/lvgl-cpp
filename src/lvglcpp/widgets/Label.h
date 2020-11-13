@@ -28,7 +28,7 @@ namespace lvglcpp {
         CENTER = LV_LABEL_ALIGN_CENTER
     };
 
-    class Label final : public Object<Label> {
+    class Label : public Object<Label> {
     protected:
         explicit Label(lv_obj_t *other) noexcept: Object(other) {};
 

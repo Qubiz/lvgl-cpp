@@ -11,7 +11,7 @@ namespace lvglcpp {
     };
 
 
-    class ObjectMask final : public Object<ObjectMask> {
+    class ObjectMask : public Object<ObjectMask> {
     protected:
         explicit ObjectMask(lv_obj_t *other) noexcept: Object(other) {};
 

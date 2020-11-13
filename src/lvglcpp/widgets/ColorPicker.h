@@ -22,7 +22,7 @@ namespace lvglcpp {
         KNOB = LV_CPICKER_PART_KNOB,
     };
 
-    class ColorPicker final : public Object<ColorPicker> {
+    class ColorPicker : public Object<ColorPicker> {
     protected:
         explicit ColorPicker(lv_obj_t *other) noexcept: Object(other) {};
 

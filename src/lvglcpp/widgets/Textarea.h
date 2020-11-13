@@ -14,7 +14,7 @@ namespace lvglcpp {
         PLACEHOLDER = LV_TEXTAREA_PART_PLACEHOLDER, /**< Placeholder style */
     };
 
-    class Textarea final : public Object<Textarea> {
+    class Textarea : public Object<Textarea> {
     protected:
         explicit Textarea(lv_obj_t *other) noexcept: Object(other) {};
 

@@ -6,7 +6,7 @@
 
 namespace lvglcpp {
 
-    class Canvas final : public Object<Canvas> {
+    class Canvas : public Object<Canvas> {
     protected:
         explicit Canvas(lv_obj_t *other) noexcept: Object(other) {};
 

@@ -23,7 +23,7 @@ namespace lvglcpp {
     };
 
 
-    class Spinner final : public Object<Spinner> {
+    class Spinner : public Object<Spinner> {
     protected:
         explicit Spinner(lv_obj_t *other) noexcept: Object(other) {};
 

@@ -8,7 +8,7 @@
 
 namespace lvglcpp {
 
-    class Image final : public Object<Image> {
+    class Image : public Object<Image> {
     protected:
         explicit Image(lv_obj_t *other) noexcept: Object(other) {};
 

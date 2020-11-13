@@ -16,7 +16,7 @@ namespace lvglcpp {
         CELL4 = LV_TABLE_PART_CELL4,
     };
 
-    class Table final : public Object<Table> {
+    class Table : public Object<Table> {
     protected:
         explicit Table(lv_obj_t *other) noexcept: Object(other) {};
 

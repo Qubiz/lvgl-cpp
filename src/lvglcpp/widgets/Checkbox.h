@@ -13,7 +13,7 @@ namespace lvglcpp {
         BULLET = LV_CHECKBOX_PART_BULLET, /**< Style of box (released). */
     };
 
-    class Checkbox final : public Object<Checkbox> {
+    class Checkbox : public Object<Checkbox> {
     protected:
         explicit Checkbox(lv_obj_t *other) noexcept: Object(other) {};
 

@@ -29,7 +29,7 @@ namespace lvglcpp {
         SCROLLABLE = LV_PAGE_PART_SCROLLABLE,
     };
 
-    class Page final : public Object<Page> {
+    class Page : public Object<Page> {
     protected:
         explicit Page(lv_obj_t *other) noexcept: Object(other) {};
 

@@ -11,7 +11,7 @@ namespace lvglcpp {
         CURSOR = LV_SPINBOX_PART_CURSOR,
     };
 
-    class Spinbox final : public Object<Spinbox> {
+    class Spinbox : public Object<Spinbox> {
     public:
         static constexpr uint8_t MAX_DIGIT_COUNT = LV_SPINBOX_MAX_DIGIT_COUNT;
 

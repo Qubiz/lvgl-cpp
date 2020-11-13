@@ -6,7 +6,7 @@
 
 namespace lvglcpp {
 
-    class Arc final : public Object<Arc> {
+    class Arc : public Object<Arc> {
     protected:
         explicit Arc(lv_obj_t *other) noexcept: Object(other) {};
 

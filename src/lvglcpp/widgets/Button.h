@@ -19,7 +19,7 @@ namespace lvglcpp {
         CHECKED_DISABLED = LV_BTN_STATE_CHECKED_DISABLED,
     };
 
-    class Button final : public Object<Button> {
+    class Button : public Object<Button> {
     protected:
         explicit Button(lv_obj_t *other) noexcept: Object(other) {};
 

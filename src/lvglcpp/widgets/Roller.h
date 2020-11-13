@@ -18,7 +18,7 @@ namespace lvglcpp {
         SELECTED = LV_ROLLER_PART_SELECTED,
     };
 
-    class Roller final : public Object<Roller> {
+    class Roller : public Object<Roller> {
     protected:
         explicit Roller(lv_obj_t *other) noexcept: Object(other) {};
 

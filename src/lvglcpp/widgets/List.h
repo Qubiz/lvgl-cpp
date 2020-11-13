@@ -20,7 +20,7 @@ namespace lvglcpp {
         SCROLLABLE = LV_LIST_PART_SCROLLABLE,
     };
 
-    class List final : public Object<List> {
+    class List : public Object<List> {
     protected:
         explicit List(lv_obj_t *other) noexcept: Object(other) {};
 

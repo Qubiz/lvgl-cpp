@@ -18,7 +18,7 @@ namespace lvglcpp {
         BTN = LV_KEYBOARD_PART_BTN,
     };
 
-    class Keyboard final : public Object<Keyboard> {
+    class Keyboard : public Object<Keyboard> {
     protected:
         explicit Keyboard(lv_obj_t *other) noexcept: Object(other) {};
 

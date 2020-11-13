@@ -12,7 +12,7 @@ namespace lvglcpp {
         EDGE_FLASH = LV_TILEVIEW_PART_EDGE_FLASH,
     };
 
-    class Tileview final : public Object<Tileview> {
+    class Tileview : public Object<Tileview> {
     protected:
         explicit Tileview(lv_obj_t *other) noexcept: Object(other) {};
 

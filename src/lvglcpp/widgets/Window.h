@@ -13,7 +13,7 @@ namespace lvglcpp {
         SCROLLBAR = LV_WIN_PART_SCROLLBAR /**< Window scrollbar style. */
     };
 
-    class Window final : public Object<Window> {
+    class Window : public Object<Window> {
     protected:
         explicit Window(lv_obj_t *other) noexcept: Object(other) {};
 

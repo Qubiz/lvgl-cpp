@@ -10,7 +10,7 @@ namespace lvglcpp {
         MAIN = LV_LED_PART_MAIN,
     };
 
-    class Led final : public Object<Led> {
+    class Led : public Object<Led> {
     protected:
         explicit Led(lv_obj_t *other) noexcept: Object(other) {};
 

@@ -22,7 +22,7 @@ namespace lvglcpp {
         BTN = LV_BTNMATRIX_PART_BTN
     };
 
-    class ButtonMatrix final : public Object<ButtonMatrix> {
+    class ButtonMatrix : public Object<ButtonMatrix> {
     protected:
         explicit ButtonMatrix(lv_obj_t *other) noexcept: Object(other) {};
 

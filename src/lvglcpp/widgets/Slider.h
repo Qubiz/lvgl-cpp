@@ -18,7 +18,7 @@ namespace lvglcpp {
         KNOB = LV_SLIDER_PART_KNOB, /** Slider knob style. */
     };
 
-    class Slider final : public Object<Slider> {
+    class Slider : public Object<Slider> {
     protected:
         explicit Slider(lv_obj_t *other) noexcept: Object(other) {};
 

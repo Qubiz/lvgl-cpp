@@ -22,7 +22,7 @@ namespace lvglcpp {
         SELECTED = LV_DROPDOWN_PART_SELECTED,
     };
 
-    class Dropdown final : public Object<Dropdown> {
+    class Dropdown : public Object<Dropdown> {
     protected:
         explicit Dropdown(lv_obj_t *other) noexcept: Object(other) {};
 

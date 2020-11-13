@@ -12,7 +12,7 @@ namespace lvglcpp {
         MAIN = LV_LINE_PART_MAIN,
     };
 
-    class Line final : public Object<Line> {
+    class Line : public Object<Line> {
     protected:
         explicit Line(lv_obj_t *other) noexcept: Object(other) {};
 

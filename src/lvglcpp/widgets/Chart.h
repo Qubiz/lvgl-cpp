@@ -28,7 +28,7 @@ namespace lvglcpp {
         SERIES = LV_CHART_PART_SERIES,
     };
 
-    class Chart final : public Object<Chart> {
+    class Chart : public Object<Chart> {
     protected:
         explicit Chart(lv_obj_t *other) noexcept: Object(other) {};
 

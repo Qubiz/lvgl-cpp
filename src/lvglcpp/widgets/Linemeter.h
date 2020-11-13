@@ -10,7 +10,7 @@ namespace lvglcpp {
         MAIN = LV_LINEMETER_PART_MAIN,
     };
 
-    class Linemeter final : public Object<Linemeter> {
+    class Linemeter : public Object<Linemeter> {
     protected:
         explicit Linemeter(lv_obj_t *other) noexcept: Object(other) {};
 
