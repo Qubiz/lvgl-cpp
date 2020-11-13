@@ -370,12 +370,12 @@ namespace lvglcpp {
         }
 
         [[nodiscard]] auto child_back() const {
-            return Object(lv_obj_get_parent(raw(), nullptr));
+            return Object(lv_obj_get_child_back(raw(), nullptr));
         }
 
         template<typename ObjectType>
         [[nodiscard]] auto child_back(const ObjectType &child) const {
-            return Object(lv_obj_get_parent(raw(), child.raw()));
+            return Object(lv_obj_get_child_back(raw(), child.raw()));
         }
 
         [[nodiscard]] auto count_children() const {
