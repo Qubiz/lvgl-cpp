@@ -2,6 +2,8 @@
 
 #include "Object.h"
 
+#include <utility>
+
 #if LV_USE_LABEL
 
 namespace lvglcpp {
