@@ -16,7 +16,7 @@ namespace lvglcpp {
 
     enum class TabviewPart : lv_tabview_part_t {
         BG = LV_TABVIEW_PART_BG,
-        BG_SCRLLABLE = LV_TABVIEW_PART_BG_SCRLLABLE,
+        BG_SCRLLABLE = LV_TABVIEW_PART_BG_SCROLLABLE,
         TAB_BG = LV_TABVIEW_PART_TAB_BG,
         TAB_BTN = LV_TABVIEW_PART_TAB_BTN,
         INDIC = LV_TABVIEW_PART_INDIC,

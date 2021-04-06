@@ -258,7 +258,6 @@ namespace lvglcpp {
         using TRANSITION_PROP_4 = detail::Integer<LV_STYLE_TRANSITION_PROP_4, lv_style_set_transition_prop_4, lv_obj_set_style_local_transition_prop_4, lv_obj_get_style_transition_prop_4>;
         using TRANSITION_PROP_5 = detail::Integer<LV_STYLE_TRANSITION_PROP_5, lv_style_set_transition_prop_5, lv_obj_set_style_local_transition_prop_5, lv_obj_get_style_transition_prop_5>;
         using TRANSITION_PROP_6 = detail::Integer<LV_STYLE_TRANSITION_PROP_6, lv_style_set_transition_prop_6, lv_obj_set_style_local_transition_prop_6, lv_obj_get_style_transition_prop_6>;
-        using TRANSITION_PATH = detail::AnimPath<LV_STYLE_TRANSITION_PATH, lv_style_set_transition_path, lv_obj_set_style_local_transition_path, lv_obj_get_style_transition_path>;
 
         using SCALE_WIDTH = detail::Integer<LV_STYLE_SCALE_WIDTH, lv_style_set_scale_width, lv_obj_set_style_local_scale_width, lv_obj_get_style_scale_width>;
         using SCALE_BORDER_WIDTH = detail::Integer<LV_STYLE_SCALE_BORDER_WIDTH, lv_style_set_scale_border_width, lv_obj_set_style_local_scale_border_width, lv_obj_get_style_scale_border_width>;

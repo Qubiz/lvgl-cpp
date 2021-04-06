@@ -89,12 +89,12 @@ namespace lvglcpp {
             return lv_list_get_btn_text(raw());
         }
 
-        [[nodiscard]] Label btn_label() const {
-            return Label(lv_list_get_btn_label(raw()));
+        [[nodiscard]] Label btn_label(const Button& button) const {
+            return Label(lv_list_get_btn_label(button.raw()));
         }
 
-        [[nodiscard]] Image btn_img() const {
-            return Image(lv_list_get_btn_img(raw()));
+        [[nodiscard]] Image btn_img(const Button& button) const {
+            return Image(lv_list_get_btn_img(button.raw()));
         }
 
         [[nodiscard]] std::optional<Button> prev_btn(Button &current) const {
